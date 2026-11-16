@@ -1,0 +1,1713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class 3 English National Olympiad - Topic-Wise CBT Portal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f1f5f9;
+      color: #0f172a;
+    }
+    /* Custom scrollbar for passages and palettes */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    /* Palette status badges matching standard CBT conventions */
+    .palette-not-visited {
+      background-color: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      color: #475569;
+    }
+    .palette-not-answered {
+      background-color: #ef4444;
+      border: 1.5px solid #dc2626;
+      color: #ffffff;
+      border-radius: 0.5rem 0.5rem 0.15rem 0.15rem;
+    }
+    .palette-answered {
+      background-color: #16a34a;
+      border: 1.5px solid #15803d;
+      color: #ffffff;
+      border-radius: 0.5rem 0.5rem 0.15rem 0.15rem;
+    }
+    .palette-marked {
+      background-color: #7c3aed;
+      border: 1.5px solid #6d28d9;
+      color: #ffffff;
+      border-radius: 9999px;
+    }
+    .palette-answered-marked {
+      background-color: #7c3aed;
+      border: 1.5px solid #6d28d9;
+      color: #ffffff;
+      border-radius: 9999px;
+      position: relative;
+    }
+    .palette-answered-marked::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      width: 10px;
+      height: 10px;
+      background-color: #22c55e;
+      border: 1.5px solid #ffffff;
+      border-radius: 9999px;
+    }
+    .palette-active {
+      ring: 3px;
+      box-shadow: 0 0 0 3px #f59e0b;
+      transform: scale(1.06);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Top Branding Header -->
+  <header class="bg-[#0B2545] text-white shadow-md sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="goToDashboard()">
+        <!-- National Olympiad Emblem SVG -->
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#F59E0B] to-[#D97706] flex items-center justify-center shadow-inner shrink-0">
+          <svg class="w-6 h-6 text-[#0B2545]" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-amber-400">National Olympiad</span>
+            <span class="text-[11px] bg-white/15 px-2 py-0.5 rounded-full text-slate-200 font-medium">Class 3 • English</span>
+          </div>
+          <h1 class="text-base sm:text-lg font-extrabold tracking-tight leading-tight">Topic-Wise Practice & CBT Portal</h1>
+        </div>
+      </div>
+
+      <!-- Header Right Controls -->
+      <div id="headerControls" class="flex items-center gap-2 sm:gap-3">
+        <div class="hidden md:flex items-center gap-4 bg-white/10 px-3.5 py-1.5 rounded-xl text-xs">
+          <div>
+            <span class="text-slate-300">Topics Mastered:</span>
+            <span id="hdrCompletedCount" class="font-bold text-amber-400 ml-1">0 / 23</span>
+          </div>
+          <div class="h-3.5 w-px bg-white/20"></div>
+          <div>
+            <span class="text-slate-300">Total Qs Solved:</span>
+            <span id="hdrSolvedCount" class="font-bold text-emerald-400 ml-1">0 / 400</span>
+          </div>
+        </div>
+        <button id="btnHeaderDashboard" onclick="goToDashboard()" class="hidden px-3 py-1.5 rounded-lg bg-white/15 hover:bg-white/25 text-xs sm:text-sm font-semibold transition flex items-center gap-1.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+          All Topics
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6">
+
+    <!-- ==================== VIEW 1: TOPIC DASHBOARD ==================== -->
+    <section id="dashboardView" class="space-y-6">
+      <!-- Hero / Summary Banner -->
+      <div class="bg-gradient-to-r from-[#0B2545] via-[#13315C] to-[#1D4ED8] rounded-2xl p-6 sm:p-8 text-white shadow-lg relative overflow-hidden">
+        <div class="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+          <div class="max-w-2xl space-y-2">
+            <span class="inline-block px-3 py-1 rounded-full bg-amber-400/20 text-amber-300 text-xs font-bold uppercase tracking-wider">Complete E-Book Question Bank • 400 Questions</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Choose a Topic to Start Practicing</h2>
+            <p class="text-sm sm:text-base text-slate-200 leading-relaxed">
+              Practice chapter-by-chapter across all 23 topics from the Class 3 English National Olympiad E-Book, or challenge yourself with a timed Full Mock Test.
+            </p>
+          </div>
+          <div class="flex flex-wrap items-center gap-3 shrink-0">
+            <button onclick="startFullMockTest()" class="px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-[#0B2545] font-extrabold text-sm shadow-md transition flex items-center gap-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              Full Olympiad Mock (35 Qs)
+            </button>
+            <button onclick="openResetModal()" class="px-4 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-sm transition">
+              Reset Progress
+            </button>
+          </div>
+        </div>
+        <!-- Decorative circles -->
+        <div class="w-64 h-64 bg-amber-400/10 rounded-full absolute -right-12 -bottom-24 pointer-events-none"></div>
+        <div class="w-40 h-40 bg-blue-400/10 rounded-full absolute right-36 -top-16 pointer-events-none"></div>
+      </div>
+
+      <!-- Search & Filter Bar -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/80 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+        <div class="relative flex-1">
+          <svg class="w-5 h-5 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input id="topicSearchInput" type="text" oninput="renderTopicCards()" placeholder="Search topics (e.g., Homophones, Verbs, Reading, HOTS)..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm" />
+        </div>
+        <div class="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0">
+          <button onclick="setTopicFilter('all')" id="filter-all" class="filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-[#0B2545] text-white transition whitespace-nowrap">All (23)</button>
+          <button onclick="setTopicFilter('pending')" id="filter-pending" class="filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition whitespace-nowrap">Not Attempted</button>
+          <button onclick="setTopicFilter('completed')" id="filter-completed" class="filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition whitespace-nowrap">Completed</button>
+        </div>
+      </div>
+
+      <!-- 23 Chapters Grid -->
+      <div id="topicsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Populated dynamically by JS -->
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 2: CBT TEST INTERFACE ==================== -->
+    <section id="testView" class="hidden space-y-4">
+      <!-- CBT Control Top Strip -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <button onclick="confirmExitTest()" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition" title="Back to Topics">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+          </button>
+          <div>
+            <div class="flex items-center gap-2">
+              <span id="testTopicBadge" class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800">Chapter 1</span>
+              <span id="testQuestionCounter" class="text-xs font-semibold text-slate-500">Question 1 of 15</span>
+            </div>
+            <h2 id="testTopicTitle" class="text-lg sm:text-xl font-extrabold text-slate-900">1. Homophones</h2>
+          </div>
+        </div>
+
+        <!-- Mode & Timer Controls -->
+        <div class="flex flex-wrap items-center gap-2 sm:gap-3">
+          <!-- Instant Practice Mode Toggle -->
+          <label class="flex items-center gap-2 px-3 py-2 rounded-xl bg-amber-50 border border-amber-200 cursor-pointer select-none">
+            <input type="checkbox" id="instantCheckToggle" onchange="toggleInstantMode()" class="w-4 h-4 accent-amber-600 rounded" />
+            <span class="text-xs font-bold text-amber-900">Instant Answer Check</span>
+          </label>
+
+          <!-- Timer Toggle & Display -->
+          <div class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 text-white">
+            <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span id="timerDisplay" class="font-mono font-bold text-sm tracking-wider">15:00</span>
+            <button onclick="toggleTimerPause()" id="btnTimerToggle" class="ml-1 text-[11px] bg-white/15 hover:bg-white/25 px-2 py-0.5 rounded font-semibold">
+              Pause
+            </button>
+          </div>
+
+          <!-- Submit Button -->
+          <button onclick="openSubmitModal()" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-sm transition">
+            Submit Test
+          </button>
+        </div>
+      </div>
+
+      <!-- Main CBT Workspace: Left Question Area + Right Palette -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+
+        <!-- Left / Center Question Panel (8 cols on lg) -->
+        <div class="lg:col-span-8 space-y-4">
+          <!-- Optional Reading Passage Box (Shown for Reading Comprehension) -->
+          <div id="passageContainer" class="hidden bg-amber-50/90 border border-amber-200 rounded-2xl p-5 shadow-sm">
+            <div class="flex items-center justify-between mb-2">
+              <span id="passageTitle" class="text-xs font-extrabold uppercase tracking-wider text-amber-800 bg-amber-200/70 px-2.5 py-1 rounded-lg">Passage 1</span>
+              <button onclick="togglePassageCollapse()" id="btnCollapsePassage" class="text-xs font-bold text-amber-800 hover:underline">Hide Passage</button>
+            </div>
+            <p id="passageBody" class="text-sm sm:text-base text-slate-800 leading-relaxed font-medium"></p>
+          </div>
+
+          <!-- Question Card -->
+          <div class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200 space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+              <span id="qNumberLabel" class="text-sm font-extrabold text-[#0B2545] bg-slate-100 px-3 py-1 rounded-lg">Question 1</span>
+              <span class="text-xs font-semibold text-slate-400">Marks: +1 | Negative: 0</span>
+            </div>
+
+            <!-- Question Text -->
+            <div id="questionText" class="text-base sm:text-lg font-bold text-slate-900 leading-relaxed">
+              Loading question...
+            </div>
+
+            <!-- Picture Illustration Container (For HOTS Q20 & Q23) -->
+            <div id="questionIllustration" class="hidden rounded-xl border border-slate-200 bg-slate-50 p-4 flex flex-col items-center justify-center">
+            </div>
+
+            <!-- Options Grid (A, B, C, D) -->
+            <div id="optionsList" class="space-y-3">
+              <!-- Rendered dynamically -->
+            </div>
+
+            <!-- Instant Explanation Banner (Shown if Instant Check is enabled & option selected) -->
+            <div id="instantExplanationBox" class="hidden rounded-xl p-4 border text-sm space-y-1">
+              <div id="instantResultHeader" class="font-extrabold"></div>
+              <p id="instantExplanationText" class="text-slate-700 leading-relaxed"></p>
+            </div>
+
+            <!-- Bottom Navigation & Action Buttons -->
+            <div class="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2.5">
+              <div class="flex flex-wrap items-center gap-2">
+                <button onclick="prevQuestion()" id="btnPrev" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm transition disabled:opacity-40">
+                  ← Previous
+                </button>
+                <button onclick="clearResponse()" class="px-4 py-2.5 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-xs sm:text-sm transition">
+                  Clear Response
+                </button>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <button onclick="markForReviewAndNext()" class="px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs sm:text-sm transition">
+                  Mark for Review & Next
+                </button>
+                <button onclick="saveAndNext()" class="px-5 py-2.5 rounded-xl bg-[#0B2545] hover:bg-blue-900 text-white font-bold text-xs sm:text-sm shadow-sm transition">
+                  Save & Next →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Question Palette Sidebar (4 cols on lg) -->
+        <div class="lg:col-span-4 bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-4 lg:sticky lg:top-20">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <h3 class="font-extrabold text-sm text-slate-900">Question Palette</h3>
+            <span id="paletteTotalBadge" class="text-xs font-bold text-slate-500">15 Questions</span>
+          </div>
+
+          <!-- Status Counters -->
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div class="flex items-center gap-2 bg-slate-50 p-2 rounded-lg">
+              <span id="cntAnswered" class="w-6 h-6 flex items-center justify-center font-bold palette-answered text-[11px]">0</span>
+              <span class="text-slate-600 font-medium">Answered</span>
+            </div>
+            <div class="flex items-center gap-2 bg-slate-50 p-2 rounded-lg">
+              <span id="cntNotAnswered" class="w-6 h-6 flex items-center justify-center font-bold palette-not-answered text-[11px]">0</span>
+              <span class="text-slate-600 font-medium">Not Answered</span>
+            </div>
+            <div class="flex items-center gap-2 bg-slate-50 p-2 rounded-lg">
+              <span id="cntNotVisited" class="w-6 h-6 flex items-center justify-center font-bold palette-not-visited text-[11px]">0</span>
+              <span class="text-slate-600 font-medium">Not Visited</span>
+            </div>
+            <div class="flex items-center gap-2 bg-slate-50 p-2 rounded-lg">
+              <span id="cntMarked" class="w-6 h-6 flex items-center justify-center font-bold palette-marked text-[11px]">0</span>
+              <span class="text-slate-600 font-medium">Marked Review</span>
+            </div>
+          </div>
+
+          <!-- Grid of Question Numbers -->
+          <div class="max-h-72 overflow-y-auto pr-1">
+            <div id="questionPaletteGrid" class="grid grid-cols-5 sm:grid-cols-6 lg:grid-cols-5 gap-2">
+              <!-- Buttons generated dynamically -->
+            </div>
+          </div>
+
+          <button onclick="openSubmitModal()" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm shadow transition">
+            Submit & View Scorecard
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 3: SCORECARD & EXPLANATIONS ==================== -->
+    <section id="resultView" class="hidden space-y-6">
+      <!-- Score Summary Card -->
+      <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-slate-100 pb-5">
+          <div>
+            <span class="text-xs font-extrabold uppercase tracking-wider text-emerald-600">Test Completed!</span>
+            <h2 id="resTopicTitle" class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">1. Homophones — Scorecard</h2>
+            <p id="resEncouragement" class="text-sm text-slate-600 mt-1">Awesome effort! Review your answers and explanations below.</p>
+          </div>
+          <div class="flex flex-wrap items-center gap-2.5">
+            <button onclick="retakeCurrentTopic()" class="px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-[#0B2545] font-bold text-sm transition">
+              ↻ Retake Topic
+            </button>
+            <button id="btnNextTopic" onclick="startNextTopic()" class="px-4 py-2.5 rounded-xl bg-[#0B2545] hover:bg-blue-900 text-white font-bold text-sm transition">
+              Next Topic →
+            </button>
+            <button onclick="goToDashboard()" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm transition">
+              All Topics
+            </button>
+          </div>
+        </div>
+
+        <!-- 5 Key Metrics -->
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4">
+          <div class="bg-blue-50 border border-blue-100 rounded-2xl p-4 text-center">
+            <div class="text-xs font-bold text-blue-700 uppercase">Score</div>
+            <div id="resScore" class="text-2xl sm:text-3xl font-extrabold text-blue-950 mt-1">0 / 15</div>
+          </div>
+          <div class="bg-amber-50 border border-amber-100 rounded-2xl p-4 text-center">
+            <div class="text-xs font-bold text-amber-700 uppercase">Accuracy</div>
+            <div id="resAccuracy" class="text-2xl sm:text-3xl font-extrabold text-amber-950 mt-1">0%</div>
+          </div>
+          <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-4 text-center">
+            <div class="text-xs font-bold text-emerald-700 uppercase">Correct</div>
+            <div id="resCorrect" class="text-2xl sm:text-3xl font-extrabold text-emerald-700 mt-1">0</div>
+          </div>
+          <div class="bg-rose-50 border border-rose-100 rounded-2xl p-4 text-center">
+            <div class="text-xs font-bold text-rose-700 uppercase">Incorrect</div>
+            <div id="resIncorrect" class="text-2xl sm:text-3xl font-extrabold text-rose-700 mt-1">0</div>
+          </div>
+          <div class="bg-slate-100 border border-slate-200 rounded-2xl p-4 text-center col-span-2 sm:col-span-1">
+            <div class="text-xs font-bold text-slate-600 uppercase">Time Taken</div>
+            <div id="resTime" class="text-2xl sm:text-3xl font-extrabold text-slate-800 mt-1">00:00</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Review Filter Tabs -->
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <h3 class="text-lg font-extrabold text-slate-900">Detailed Question-by-Question Review</h3>
+        <div class="flex items-center gap-2">
+          <button onclick="filterReview('all')" id="rev-all" class="rev-filter px-3 py-1.5 rounded-lg text-xs font-bold bg-[#0B2545] text-white">All</button>
+          <button onclick="filterReview('incorrect')" id="rev-incorrect" class="rev-filter px-3 py-1.5 rounded-lg text-xs font-bold bg-white border border-slate-200 text-slate-700">Incorrect</button>
+          <button onclick="filterReview('unattempted')" id="rev-unattempted" class="rev-filter px-3 py-1.5 rounded-lg text-xs font-bold bg-white border border-slate-200 text-slate-700">Unattempted</button>
+        </div>
+      </div>
+
+      <!-- Detailed Solutions List -->
+      <div id="reviewList" class="space-y-4">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Custom Confirmation Modal (Replaces alert/confirm) -->
+  <div id="customModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
+      <h3 id="modalTitle" class="text-lg font-extrabold text-slate-900">Confirm Action</h3>
+      <p id="modalMessage" class="text-sm text-slate-600 leading-relaxed">Are you sure?</p>
+      <div id="modalStats" class="hidden bg-slate-50 rounded-xl p-3 text-xs space-y-1 border border-slate-200"></div>
+      <div class="flex items-center justify-end gap-2.5 pt-2">
+        <button onclick="closeModal()" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm">Cancel</button>
+        <button id="modalConfirmBtn" class="px-4 py-2 rounded-xl bg-[#0B2545] hover:bg-blue-900 text-white font-bold text-sm">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // COMPLETE QUESTION BANK: ALL 23 CHAPTERS & 400 QUESTIONS FROM E-BOOK
+    // =========================================================================
+    const PASSAGES = {
+      p1: {
+        title: "Passage 1: Tom and Max",
+        text: "Tom is a young boy who loves animals. He has a pet dog named Max, who is very playful. Every morning, Tom and Max go to the park. Tom throws a ball, and Max runs after it with great enthusiasm. They play fetch until the sun is high in the sky. After playing, Tom gives Max a treat and they both walk home, happy and tired. Tom feels that spending time with Max is the best part of his day."
+      },
+      p2: {
+        title: "Passage 2: Lisa's Birthday",
+        text: "Lisa is excited because it is her birthday. She wakes up early and finds a big box in the living room. Her parents tell her that it is a special gift. Lisa opens the box and finds a beautiful new bicycle inside. She is thrilled and immediately starts riding it around the yard. Later, she invites her friends over for a birthday party, where they have cake and play games. Lisa feels very grateful for her wonderful day."
+      },
+      p3: {
+        title: "Passage 3: Ella's Rose Garden",
+        text: "Ella is a young girl who loves gardening. She has a small garden in her backyard where she grows various plants. Ella spends her weekends planting flowers, watering the plants, and taking care of them. One day, she notices that her roses are not blooming as they should. Ella decides to read a book about rose care to find out what might be wrong. After following the advice in the book, she discovers that her roses need more sunlight. Ella adjusts their position, and soon the roses start blooming beautifully. She feels very proud of her garden."
+      },
+      p4: {
+        title: "Passage 4: Riya's Rainy Morning",
+        text: "It was a rainy morning. Riya looked out of the window and saw water everywhere. She couldn’t go outside to play, so she decided to draw pictures. She picked up her crayons and drew a rainbow, an umbrella, and some clouds. Her mother made her a warm cup of milk, and Riya sat by the window, smiling. She loved rainy days because she could stay inside and do creative things."
+      },
+      p5: {
+        title: "Passage 5: Aarav's Kite",
+        text: "Aarav was flying his kite in the open field. The wind was strong, and the kite soared high in the sky. Suddenly, the string broke, and the kite flew away. Aarav ran after it but couldn’t catch it. He felt very sad. The next day, his friend Meera surprised him with a new kite. Aarav was so happy and thanked her with a big smile."
+      },
+      p6: {
+        title: "Passage 6: Grandma's Garden",
+        text: "Grandma has a small garden behind her house. She grows flowers, tomatoes, and carrots. Every evening, she waters the plants and talks to them. She believes that plants grow better when someone speaks to them with love. Her granddaughter, Aanya, loves helping her. Together, they pull out weeds and pick fresh vegetables."
+      }
+    };
+
+    const SVG_ILLUSTRATIONS = {
+      iceCream: `
+        <svg viewBox="0 0 320 150" class="w-full max-w-xs h-36 mx-auto" xmlns="http://www.w3.org/2000/svg">
+          <rect width="320" height="150" rx="14" fill="#FEF3C7"/>
+          <circle cx="280" cy="32" r="18" fill="#FBBF24"/>
+          <!-- Girl 1 -->
+          <circle cx="110" cy="58" r="20" fill="#FDBA74"/>
+          <path d="M90 55 Q110 30 130 55" fill="#78350F"/>
+          <circle cx="104" cy="56" r="2.5" fill="#1E293B"/>
+          <circle cx="116" cy="56" r="2.5" fill="#1E293B"/>
+          <path d="M105 65 Q110 70 115 65" stroke="#1E293B" stroke-width="2" fill="none"/>
+          <path d="M88 135 L95 82 L125 82 L132 135 Z" fill="#F43F5E"/>
+          <!-- Girl 2 -->
+          <circle cx="210" cy="58" r="20" fill="#FDBA74"/>
+          <path d="M190 55 Q210 28 230 55" fill="#451A03"/>
+          <circle cx="204" cy="56" r="2.5" fill="#1E293B"/>
+          <circle cx="216" cy="56" r="2.5" fill="#1E293B"/>
+          <path d="M205 65 Q210 70 215 65" stroke="#1E293B" stroke-width="2" fill="none"/>
+          <path d="M188 135 L195 82 L225 82 L232 135 Z" fill="#3B82F6"/>
+          <!-- Ice Cream Cones -->
+          <polygon points="132,98 142,98 137,122" fill="#D97706"/>
+          <circle cx="137" cy="93" r="8" fill="#EC4899"/>
+          <polygon points="178,98 188,98 183,122" fill="#D97706"/>
+          <circle cx="183" cy="93" r="8" fill="#A855F7"/>
+          <text x="160" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="#78350F">Two friends sharing ice cream together</text>
+        </svg>
+      `,
+      beachSunny: `
+        <svg viewBox="0 0 320 150" class="w-full max-w-xs h-36 mx-auto" xmlns="http://www.w3.org/2000/svg">
+          <rect width="320" height="90" rx="12" fill="#BAE6FD"/>
+          <rect y="75" width="320" height="30" fill="#38BDF8"/>
+          <rect y="100" width="320" height="50" rx="12" fill="#FDE68A"/>
+          <!-- Bright Sun -->
+          <circle cx="272" cy="32" r="18" fill="#F59E0B"/>
+          <g stroke="#F59E0B" stroke-width="2.5">
+            <line x1="272" y1="6" x2="272" y2="11"/><line x1="272" y1="53" x2="272" y2="58"/>
+            <line x1="246" y1="32" x2="251" y2="32"/><line x1="293" y1="32" x2="298" y2="32"/>
+          </g>
+          <!-- Beach Umbrella -->
+          <line x1="85" y1="55" x2="85" y2="118" stroke="#78350F" stroke-width="3"/>
+          <path d="M45 60 Q85 28 125 60 Z" fill="#EF4444"/>
+          <!-- Sandcastle & Buckets -->
+          <rect x="155" y="105" width="34" height="22" fill="#F59E0B" rx="3"/>
+          <rect x="163" y="95" width="18" height="12" fill="#D97706" rx="2"/>
+          <polygon points="210,127 226,127 223,112 213,112" fill="#2563EB"/>
+          <text x="160" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="#0369A1">Children playing at the beach on a sunny day</text>
+        </svg>
+      `
+    };
+
+    const EBOOK_CHAPTERS = [
+      {
+        id: 1,
+        title: "Homophones",
+        subtitle: "Words that sound the same with different spellings & meanings",
+        questions: [
+          { q: "Which of the following pairs are homophones?", opts: ["Bear and Bare", "Cat and Dog", "Car and Train", "Sun and Moon"], ans: 0, exp: "Homophones are words that sound the same but have different meanings and spellings. 'Bear' and 'Bare' are examples." },
+          { q: "What is the homophone of 'night'?", opts: ["Nite", "Knight", "Neat", "Net"], ans: 1, exp: "'Knight' and 'night' sound the same but have different meanings." },
+          { q: "Which word sounds the same as 'flower'?", opts: ["Flew", "Floor", "Flour", "Flaw"], ans: 2, exp: "'Flower' and 'Flour' are homophones." },
+          { q: "Which of these pairs are homophones?", opts: ["Eat and Drink", "Jump and Run", "Pen and Pencil", "Sail and Sale"], ans: 3, exp: "'Sail' and 'Sale' sound the same but are spelled differently." },
+          { q: "What is the homophone of 'write'?", opts: ["Ride", "Right", "Light", "Ripe"], ans: 1, exp: "'Write' and 'Right' are homophones." },
+          { q: "Which word sounds like 'sea'?", opts: ["See", "Say", "Saw", "Sue"], ans: 0, exp: "'Sea' and 'See' are homophones." },
+          { q: "Which of the following pairs are homophones?", opts: ["Mail and Male", "Pen and Paper", "Rock and Stone", "Chair and Table"], ans: 0, exp: "'Mail' and 'Male' sound the same but have different meanings." },
+          { q: "What is the homophone of 'blue'?", opts: ["Bloom", "Blued", "Blew", "Block"], ans: 2, exp: "'Blue' and 'Blew' sound the same but have different meanings." },
+          { q: "Which pair of words are homophones?", opts: ["Run and Walk", "Pair and Pare", "Book and Magazine", "Chair and Couch"], ans: 1, exp: "'Pair' and 'Pare' sound the same but have different meanings." },
+          { q: "Which of the following is a homophone for 'plane'?", opts: ["Plain", "Plan", "Plaid", "Play"], ans: 0, exp: "'Plane' and 'Plain' are homophones." },
+          { q: "Which of the following pairs are homophones?", opts: ["Blue and Blew", "School and Class", "Clock and Watch", "Dog and Bone"], ans: 0, exp: "Blue and Blew – 'Blue' is a color, 'blew' is the past tense of blow. They sound the same but mean different things." },
+          { q: "Choose the homophones from the options below:", opts: ["Knight and Night", "Girl and Boy", "Table and Chair", "Loud and Quiet"], ans: 0, exp: "Knight and Night – 'Knight' is a soldier from old times, 'night' is the time after sunset. They are pronounced the same." },
+          { q: "Which word pair sounds the same but has different meanings and spellings?", opts: ["Sea and See", "Apple and Orange", "Bird and Nest", "Leaf and Tree"], ans: 0, exp: "Sea and See – 'Sea' is a large body of water, 'see' means to look. Same sound, different spelling and meaning." },
+          { q: "Identify the correct homophone pair:", opts: ["One and Won", "Car and Truck", "Tall and High", "Big and Huge"], ans: 0, exp: "'One' (the number 1) and 'Won' (past tense of win) sound identical." },
+          { q: "Which of the following is a pair of homophones?", opts: ["Mail and Male", "Book and Page", "Window and Door", "Pen and Pencil"], ans: 0, exp: "Mail and Male – 'Mail' means letters or packages, 'male' refers to a gender. Pronounced the same." }
+        ]
+      },
+      {
+        id: 2,
+        title: "Collocations",
+        subtitle: "Natural word combinations used together in English",
+        questions: [
+          { q: "Which of these is a common collocation?", opts: ["Quick tea", "Fast tea", "Strong tea", "Soft tea"], ans: 2, exp: "'Strong tea' is a common collocation." },
+          { q: "Which phrase is a common collocation?", opts: ["Heavy rain", "Light rain", "Soft rain", "Smooth rain"], ans: 0, exp: "'Heavy rain' is a common collocation." },
+          { q: "What is a common collocation for 'make'?", opts: ["Make a computer", "Make a car", "Make a desk", "Make a bed"], ans: 3, exp: "'Make a bed' is a commonly used phrase." },
+          { q: "Which of these is a common collocation?", opts: ["Quick smile", "Dark smile", "Bright smile", "Slow smile"], ans: 2, exp: "'Bright smile' is a common collocation." },
+          { q: "Which phrase is a common collocation?", opts: ["Light wind", "Strong wind", "Soft wind", "Smooth wind"], ans: 1, exp: "'Strong wind' is a common collocation." },
+          { q: "Which is a common collocation for 'heavy'?", opts: ["Heavy smile", "Heavy tea", "Heavy food", "Heavy rain"], ans: 3, exp: "'Heavy rain' is a common collocation." },
+          { q: "Which phrase commonly goes with 'delicious'?", opts: ["Delicious food", "Delicious chair", "Delicious car", "Delicious bed"], ans: 0, exp: "'Delicious food' is a common collocation." },
+          { q: "Which of these is a common collocation?", opts: ["Make noise", "Make music", "Make sleep", "Make water"], ans: 0, exp: "'Make noise' is a common collocation." },
+          { q: "Which phrase is a common collocation for 'good'?", opts: ["Good house", "Good job", "Good book", "Good table"], ans: 1, exp: "'Good job' is a commonly used phrase." },
+          { q: "Which of these is a common collocation for 'fast'?", opts: ["Fast car", "Fast bed", "Fast food", "Fast lamp"], ans: 0, exp: "'Fast car' is a common collocation." },
+          { q: "Choose the correct word to complete the collocation: 'brush your ______'", opts: ["hands", "shoes", "teeth", "clothes"], ans: 2, exp: "teeth – We say 'brush your teeth' as a common daily activity." },
+          { q: "Select the best collocation: You usually 'make a ______' when you plan something.", opts: ["story", "decision", "picture", "song"], ans: 1, exp: "decision – 'Make a decision' is a standard collocation used when choosing something." },
+          { q: "Pick the correct word that fits the phrase: He caught a ______ yesterday.", opts: ["cold", "toy", "pencil", "bike"], ans: 0, exp: "cold – 'Caught a cold' is a common phrase used when someone becomes sick." },
+          { q: "Which word correctly completes this phrase: Please take a ______ before speaking.", opts: ["sleep", "turn", "walk", "jump"], ans: 1, exp: "turn – 'Take a turn' is a polite collocation used in games and conversations." },
+          { q: "Choose the correct collocation: She did her ______ before the exam.", opts: ["studies", "shopping", "brushing", "homework"], ans: 3, exp: "homework – We say 'do your homework', not 'make homework' or other verbs." }
+        ]
+      },
+      {
+        id: 3,
+        title: "Spellings",
+        subtitle: "Identify the accurately spelled English words",
+        questions: [
+          { q: "Which is the correct spelling?", opts: ["Accommodate", "Accomodate", "Acommodate", "Acomodate"], ans: 0, exp: "The correct spelling is 'Accommodate' (with double c and double m)." },
+          { q: "Which is the correct spelling?", opts: ["Necesary", "Necessery", "Necessary", "Necesary"], ans: 2, exp: "The correct spelling is 'Necessary'." },
+          { q: "Which is the correct spelling?", opts: ["Separate", "Seperate", "Separete", "Seperat"], ans: 0, exp: "The correct spelling is 'Separate'." },
+          { q: "Which is the correct spelling?", opts: ["Convience", "Conveneince", "Convenience", "Conveniance"], ans: 2, exp: "The correct spelling is 'Convenience'." },
+          { q: "Which of these is correct?", opts: ["Definitely", "Definately", "Definitley", "Definetly"], ans: 0, exp: "The correct spelling is 'Definitely'." },
+          { q: "What is the correct spelling?", opts: ["Calendar", "Calender", "Calandar", "Calender"], ans: 0, exp: "The correct spelling is 'Calendar'." },
+          { q: "Which is the correct spelling?", opts: ["Acommodation", "Accomodation", "Accommodation", "Acommodation"], ans: 2, exp: "The correct spelling is 'Accommodation'." },
+          { q: "Which is the correct spelling?", opts: ["Rythm", "Rhytm", "Rhythm", "Rythym"], ans: 2, exp: "The correct spelling is 'Rhythm'." },
+          { q: "Which is the correct spelling?", opts: ["Environment", "Environmant", "Envorinment", "Envirnment"], ans: 0, exp: "The correct spelling is 'Environment'." },
+          { q: "Which is the correct spelling?", opts: ["Beautifull", "Beatiful", "Beautifull", "Beautiful"], ans: 3, exp: "The correct spelling is 'Beautiful' (with one 'l' at the end)." },
+          { q: "Which of the following is spelled correctly?", opts: ["Frend", "Freind", "Friend", "Freindd"], ans: 2, exp: "Friend – This is the correct spelling for someone you like and spend time with." },
+          { q: "Choose the correctly spelled word:", opts: ["Surprese", "Suprise", "Surprise", "Suprerise"], ans: 2, exp: "Surprise – Correct spelling of the word meaning something that you did not expect." },
+          { q: "Select the word with the correct spelling:", opts: ["Elefant", "Elephent", "Elephant", "Eliphant"], ans: 2, exp: "Elephant – Correct spelling of the large animal with a trunk." },
+          { q: "Pick the correctly spelled color name:", opts: ["Yelow", "Yellow", "Yelloe", "Yallow"], ans: 1, exp: "Yellow – Correct spelling of the bright primary color." },
+          { q: "Which of the following is the correct spelling for the day of the week?", opts: ["Wesnesday", "Wednesday", "Wendesday", "Wednsday"], ans: 1, exp: "Wednesday – This is a tricky one, but 'Wednesday' is the correct spelling." }
+        ]
+      },
+      {
+        id: 4,
+        title: "Words Related to Animals",
+        subtitle: "Young ones, group names, homes, and animal traits",
+        questions: [
+          { q: "What is the term for a baby cat?", opts: ["Cub", "Kitten", "Pup", "Calf"], ans: 1, exp: "A baby cat is called a kitten." },
+          { q: "What do you call a group of lions?", opts: ["Pack", "Pride", "School", "Flock"], ans: 1, exp: "A group of lions is called a pride." },
+          { q: "Which animal is known for its ability to change color?", opts: ["Chameleon", "Elephant", "Tiger", "Lion"], ans: 0, exp: "Chameleons can change their color to blend with their surroundings." },
+          { q: "What is the young of a cow called?", opts: ["Calf", "Foal", "Kid", "Pup"], ans: 0, exp: "A young cow is called a calf." },
+          { q: "Which animal is known for having a long neck?", opts: ["Giraffe", "Elephant", "Zebra", "Hippo"], ans: 0, exp: "Giraffes are known for their long necks." },
+          { q: "What is the term for a baby sheep?", opts: ["Lamb", "Calf", "Foal", "Kid"], ans: 0, exp: "A baby sheep is called a lamb." },
+          { q: "Which of the following animals is correctly matched with its habitat?", opts: ["Camel - Rainforest", "Polar bear - Desert", "Kangaroo - Savannah", "Penguin - Arctic"], ans: 2, exp: "Penguins live in the Antarctic, not the Arctic. The correct match is 'Kangaroo - Savannah'." },
+          { q: "What is a male horse called?", opts: ["Stallion", "Mare", "Filly", "Colt"], ans: 0, exp: "A male horse is called a stallion." },
+          { q: "What is the term for a young horse?", opts: ["Foal", "Pup", "Kid", "Calf"], ans: 0, exp: "A young horse is called a foal." },
+          { q: "Which of the following animals is a mammal?", opts: ["Crocodile", "Dolphin", "Shark", "Owl"], ans: 1, exp: "Mammals are warm-blooded animals that have fur or hair and usually give live birth. Dolphins are mammals." },
+          { q: "Which of the following is the home of a lion?", opts: ["Den", "Nest", "Stable", "Coop"], ans: 0, exp: "Den – A lion lives in a den, not a stable or nest." },
+          { q: "What do we call a baby dog?", opts: ["Cub", "Kitten", "Pup", "Calf"], ans: 2, exp: "Pup – A baby dog is called a pup or puppy." },
+          { q: "Which of these animals is known for laying eggs?", opts: ["Cow", "Tiger", "Hen", "Dog"], ans: 2, exp: "Hen – Hens lay eggs; cows, tigers, and dogs give birth to live young." },
+          { q: "Which animal is known as the 'King of the Jungle'?", opts: ["Elephant", "Bear", "Tiger", "Lion"], ans: 3, exp: "Lion – The lion is famously called the King of the Jungle." },
+          { q: "Which of these animals can fly?", opts: ["Horse", "Eagle", "Rabbit", "Goat"], ans: 1, exp: "Eagle – Eagles are birds that can fly. Horses, rabbits, and goats cannot." }
+        ]
+      },
+      {
+        id: 5,
+        title: "Household Things",
+        subtitle: "Everyday appliances, tools, and items at home",
+        questions: [
+          { q: "What do you use to clean the floor?", opts: ["Vacuum cleaner", "Refrigerator", "Television", "Washing machine"], ans: 0, exp: "A vacuum cleaner is used to clean the floor." },
+          { q: "What is a common item used for cooking food?", opts: ["Toaster", "Washing machine", "Refrigerator", "Microwave"], ans: 3, exp: "A microwave is commonly used for cooking food." },
+          { q: "Which item is used to keep clothes fresh and clean?", opts: ["Oven", "Air conditioner", "Iron", "Washing machine"], ans: 3, exp: "A washing machine is used to clean and freshen clothes." },
+          { q: "What is used to store food and keep it fresh?", opts: ["Blender", "Refrigerator", "Toaster", "Microwave"], ans: 1, exp: "A refrigerator is used to store food." },
+          { q: "What is used to wash dishes?", opts: ["Dishwasher", "Oven", "Blender", "Iron"], ans: 0, exp: "A dishwasher is used to wash dishes." },
+          { q: "Which item is used for lighting?", opts: ["Lamp", "Refrigerator", "Oven", "Microwave"], ans: 0, exp: "A lamp is used for lighting." },
+          { q: "What is used to keep food hot and bake?", opts: ["Blender", "Oven", "Toaster", "Washing machine"], ans: 1, exp: "An oven is used to cook and keep food hot." },
+          { q: "Which item is used to dry clothes?", opts: ["Dryer", "Washing machine", "Dishwasher", "Blender"], ans: 0, exp: "A dryer is used to dry clothes." },
+          { q: "What is used to chop vegetables?", opts: ["Knife", "Iron", "Vacuum cleaner", "Lamp"], ans: 0, exp: "A knife is used to chop vegetables." },
+          { q: "Which appliance is used to keep food cold?", opts: ["Toaster", "Air conditioner", "Refrigerator", "Oven"], ans: 2, exp: "A refrigerator keeps food cold." },
+          { q: "Which household item is used to remove wrinkles from clothes?", opts: ["Fan", "Iron", "Blender", "Oven"], ans: 1, exp: "An iron is used to press clothes and remove wrinkles." },
+          { q: "What do we use to boil water quickly?", opts: ["Kettle", "Toaster", "Air conditioner", "Dishwasher"], ans: 0, exp: "An electric kettle boils water quickly and easily." },
+          { q: "Which of these is used to keep a room cool?", opts: ["Mixer", "Washing machine", "Fan", "Heater"], ans: 2, exp: "A fan helps keep the room cool by blowing air." },
+          { q: "What do we use to make bread crispy and brown?", opts: ["Blender", "Oven", "Toaster", "Lamp"], ans: 2, exp: "A toaster heats and crisps slices of bread." },
+          { q: "What is commonly found on the ceiling to provide air?", opts: ["Heater", "Table fan", "Ceiling fan", "Exhaust fan"], ans: 2, exp: "A ceiling fan is mounted on the ceiling to circulate air in the room." }
+        ]
+      },
+      {
+        id: 6,
+        title: "Clothes",
+        subtitle: "Apparel, accessories, and attire for different occasions",
+        questions: [
+          { q: "What do you wear on your feet?", opts: ["Gloves", "Hat", "Shoes", "Scarf"], ans: 2, exp: "Shoes are worn on the feet." },
+          { q: "What is worn on the head?", opts: ["Jacket", "Socks", "Belt", "Hat"], ans: 3, exp: "A hat is worn on the head." },
+          { q: "What do you call a warm knitted top?", opts: ["Sweater", "T-shirt", "Shorts", "Scarf"], ans: 0, exp: "A sweater is a warm garment worn in cold weather." },
+          { q: "Which item is worn on the hands?", opts: ["Gloves", "Socks", "Shoes", "Hat"], ans: 0, exp: "Gloves are worn on the hands." },
+          { q: "What is worn around the waist?", opts: ["Scarf", "Hat", "Belt", "Gloves"], ans: 2, exp: "A belt is worn around the waist." },
+          { q: "Which of these is worn on the upper body?", opts: ["Scarf", "Socks", "Shoes", "T-shirt"], ans: 3, exp: "A T-shirt is worn on the upper body." },
+          { q: "What do you call clothing worn on the legs?", opts: ["Pants", "Hat", "Gloves", "Scarf"], ans: 0, exp: "Pants are worn on the legs." },
+          { q: "Which item is used to keep warm around the neck?", opts: ["Gloves", "Socks", "Scarf", "Belt"], ans: 2, exp: "A scarf is used to keep warm around the neck." },
+          { q: "What is worn on the body for formal occasions?", opts: ["Pajamas", "Suit", "Shorts", "Swimsuit"], ans: 1, exp: "A suit is worn for formal occasions." },
+          { q: "What is worn while swimming?", opts: ["Swimsuit", "Suit", "T-shirt", "Jeans"], ans: 0, exp: "A swimsuit is worn when swimming." },
+          { q: "Which item is commonly worn to bed at night?", opts: ["Blazer", "Pajamas", "Jeans", "Uniform"], ans: 1, exp: "Pajamas are soft clothes we wear when going to sleep." },
+          { q: "What do people usually wear on rainy days?", opts: ["Raincoat", "Cap", "Scarf", "Sandals"], ans: 0, exp: "A raincoat keeps us dry during rain." },
+          { q: "Which of these is worn during sports or exercise?", opts: ["Tie", "Tracksuit", "Sweater", "Apron"], ans: 1, exp: "A tracksuit is worn during exercise or games." },
+          { q: "What do we use to fasten pants or jeans?", opts: ["Socks", "Gloves", "Belt", "Shirt"], ans: 2, exp: "Belts help hold up pants or jeans." },
+          { q: "What do chefs commonly wear to stay clean while cooking?", opts: ["Apron", "Hoodie", "Jacket", "Raincoat"], ans: 0, exp: "An apron protects clothes from spills while cooking." }
+        ]
+      },
+      {
+        id: 7,
+        title: "Basic Emotions",
+        subtitle: "Vocabulary for feelings, moods, and expressions",
+        questions: [
+          { q: "Which word describes feeling happy?", opts: ["Sad", "Angry", "Joyful", "Scared"], ans: 2, exp: "'Joyful' describes a happy feeling." },
+          { q: "What emotion is described by feeling upset?", opts: ["Happy", "Sad", "Calm", "Excited"], ans: 1, exp: "Feeling upset is associated with sadness." },
+          { q: "Which word describes feeling nervous?", opts: ["Relaxed", "Anxious", "Joyful", "Proud"], ans: 1, exp: "'Anxious' describes a nervous feeling." },
+          { q: "What is the emotion when you are excited about something?", opts: ["Bored", "Angry", "Thrilled", "Tired"], ans: 2, exp: "'Thrilled' describes excitement." },
+          { q: "Which word describes feeling scared?", opts: ["Brave", "Afraid", "Relaxed", "Happy"], ans: 1, exp: "'Afraid' describes the emotion of being scared." },
+          { q: "What is the emotion associated with feeling proud?", opts: ["Disappointed", "Joyful", "Angry", "Sad"], ans: 1, exp: "Feeling proud is often associated with joy." },
+          { q: "Which emotion is described as feeling calm and peaceful?", opts: ["Nervous", "Excited", "Relaxed", "Upset"], ans: 2, exp: "'Relaxed' describes a calm and peaceful feeling." },
+          { q: "What is the emotion when you lose something important?", opts: ["Happy", "Angry", "Sad", "Joyful"], ans: 2, exp: "Losing something important usually makes one feel sad." },
+          { q: "Which word describes a feeling of annoyance?", opts: ["Excited", "Angry", "Proud", "Joyful"], ans: 1, exp: "'Angry' describes a feeling of annoyance." },
+          { q: "What emotion do you feel when you achieve something?", opts: ["Proud", "Sad", "Angry", "Nervous"], ans: 0, exp: "Achieving something often makes one feel proud." },
+          { q: "What emotion do you feel when someone takes your toy without asking?", opts: ["Angry", "Happy", "Proud", "Sleepy"], ans: 0, exp: "'Angry' – You might feel angry if someone takes your toy without asking." },
+          { q: "Which word describes the feeling when you are all alone and missing your friends?", opts: ["Joyful", "Brave", "Lonely", "Excited"], ans: 2, exp: "'Lonely' – Being without friends or company can make you feel lonely." },
+          { q: "What emotion do you feel when you are about to perform on stage?", opts: ["Bored", "Nervous", "Calm", "Sleepy"], ans: 1, exp: "'Nervous' – Performing in front of others can make you feel a bit nervous or shaky." },
+          { q: "How do you feel when you get a warm hug from someone you love?", opts: ["Tired", "Sad", "Loved", "Angry"], ans: 2, exp: "'Loved' – A hug from someone special can make you feel safe and loved." },
+          { q: "What is the emotion when you are not interested in what's happening?", opts: ["Excited", "Bored", "Proud", "Happy"], ans: 1, exp: "'Bored' – When nothing interests you, you often feel bored." }
+        ]
+      },
+      {
+        id: 8,
+        title: "Food",
+        subtitle: "Fruits, vegetables, grains, dairy, and meals",
+        questions: [
+          { q: "Which of these is a fruit?", opts: ["Carrot", "Potato", "Apple", "Onion"], ans: 2, exp: "An apple is a fruit." },
+          { q: "Which item is a type of bread?", opts: ["Rice", "Pizza", "Toast", "Noodles"], ans: 2, exp: "Toast is a type of bread." },
+          { q: "What is a common breakfast food?", opts: ["Spaghetti", "Pancakes", "Salad", "Pizza"], ans: 1, exp: "Pancakes are commonly eaten for breakfast." },
+          { q: "Which of these is a vegetable?", opts: ["Banana", "Broccoli", "Orange", "Apple"], ans: 1, exp: "Broccoli is a vegetable." },
+          { q: "Which food is made from milk?", opts: ["Cheese", "Bread", "Chicken", "Rice"], ans: 0, exp: "Cheese is made from milk." },
+          { q: "What type of food is pasta?", opts: ["Fruit", "Vegetable", "Grain", "Dairy"], ans: 2, exp: "Pasta is made from grains." },
+          { q: "Which item is a sweet treat?", opts: ["Salad", "Cake", "Soup", "Sandwich"], ans: 1, exp: "Cake is a sweet treat." },
+          { q: "What is a common fruit for juice?", opts: ["Carrot", "Apple", "Potato", "Broccoli"], ans: 1, exp: "Apple is commonly used for juice." },
+          { q: "Which of these is a type of meat/seafood?", opts: ["Fish", "Bread", "Rice", "Pasta"], ans: 0, exp: "Fish is a type of meat/seafood." },
+          { q: "What food is often eaten with chips?", opts: ["Ice cream", "Fruit", "Salsa", "Cereal"], ans: 2, exp: "Salsa is often eaten with chips." },
+          { q: "Which of these is a dairy product?", opts: ["Butter", "Rice", "Chicken", "Noodles"], ans: 0, exp: "Butter is made from milk and is a dairy product." },
+          { q: "What food is often used to make sandwiches?", opts: ["Cheese", "Tomato", "Bread", "All of the above"], ans: 3, exp: "Sandwiches can have cheese, tomato, and are made using bread." },
+          { q: "Which of the following is a healthy snack?", opts: ["Chips", "Candy", "Apple", "Ice cream"], ans: 2, exp: "Apples are nutritious and a great healthy snack." },
+          { q: "What food is often cooked on a grill?", opts: ["Cake", "Fish", "Yogurt", "Milk"], ans: 1, exp: "Fish is often grilled during meals or at barbecues." },
+          { q: "Which one is a frozen food often eaten as a dessert?", opts: ["Cheese", "Ice cream", "Rice", "Pasta"], ans: 1, exp: "Ice cream is a cold, frozen dessert made with milk and sugar." }
+        ]
+      },
+      {
+        id: 9,
+        title: "Animals and Pets",
+        subtitle: "Domestic companions, animal behaviors, and characteristics",
+        questions: [
+          { q: "What is a common pet in many households?", opts: ["Whale", "Lion", "Elephant", "Dog"], ans: 3, exp: "Dogs are common pets in many households." },
+          { q: "Which animal is known for its ability to purr?", opts: ["Cat", "Dog", "Bird", "Fish"], ans: 0, exp: "Cats are known for their purring sound." },
+          { q: "What is a common pet that lives in a cage/hutch?", opts: ["Dog", "Horse", "Rabbit", "Cat"], ans: 2, exp: "Rabbits are often kept in cages/hutches as pets." },
+          { q: "Which animal is known for its long ears?", opts: ["Fish", "Cat", "Dog", "Rabbit"], ans: 3, exp: "Rabbits are known for their long ears." },
+          { q: "What is a common bird kept as a pet?", opts: ["Parrot", "Tiger", "Dog", "Elephant"], ans: 0, exp: "Parrots are common pet birds." },
+          { q: "Which pet is known for its ability to fetch?", opts: ["Dog", "Cat", "Fish", "Bird"], ans: 0, exp: "Dogs are known for their ability to fetch." },
+          { q: "What type of animal is a hamster?", opts: ["Bird", "Rodent", "Reptile", "Fish"], ans: 1, exp: "Hamsters are rodents." },
+          { q: "Which pet is known for being very independent?", opts: ["Cat", "Dog", "Rabbit", "Hamster"], ans: 0, exp: "Cats are known for their independent nature." },
+          { q: "Which of the following animals is known for its ability to 'purr' as a sign of contentment?", opts: ["Dog", "Cat", "Parrot", "Rabbit"], ans: 1, exp: "Cats are well-known for their ability to purr, which is often a sign of happiness or contentment." },
+          { q: "Which animal is known for its ability to mimic sounds?", opts: ["Cat", "Dog", "Parrot", "Hamster"], ans: 2, exp: "Parrots are known for mimicking sounds." },
+          { q: "Which pet is commonly kept in a fish tank?", opts: ["Dog", "Bird", "Fish", "Rabbit"], ans: 2, exp: "Fish are common pets kept in aquariums or fish tanks." },
+          { q: "What do you call a young cat?", opts: ["Puppy", "Chick", "Kitten", "Calf"], ans: 2, exp: "A kitten is a baby cat, just like a puppy is a baby dog." },
+          { q: "Which animal is known for hopping and having a pouch?", opts: ["Rabbit", "Kangaroo", "Horse", "Goat"], ans: 1, exp: "Kangaroos hop and carry their babies in pouches." },
+          { q: "What pet is known for swimming and having fins?", opts: ["Cat", "Dog", "Fish", "Parrot"], ans: 2, exp: "Fish swim using their fins and breathe underwater." },
+          { q: "Which of these animals lives both in water and on land?", opts: ["Fish", "Tortoise", "Bird", "Hamster"], ans: 1, exp: "Tortoises/turtles can walk on land and swim in water." }
+        ]
+      },
+      {
+        id: 10,
+        title: "Synonyms and Antonyms",
+        subtitle: "Words with similar meanings and opposite meanings",
+        questions: [
+          { q: "What is a synonym for 'happy'?", opts: ["Sad", "Joyful", "Angry", "Scared"], ans: 1, exp: "'Joyful' is a synonym for 'happy.'" },
+          { q: "What is an antonym for 'hot'?", opts: ["Warm", "Cool", "Spicy", "Boiling"], ans: 1, exp: "'Cool' (or cold) is an antonym for 'hot.'" },
+          { q: "What is a synonym for 'fast'?", opts: ["Quick", "Slow", "Heavy", "Light"], ans: 0, exp: "'Quick' is a synonym for 'fast.'" },
+          { q: "What is an antonym for 'big'?", opts: ["Large", "Small", "Huge", "Enormous"], ans: 1, exp: "'Small' is an antonym for 'big.'" },
+          { q: "What is a synonym for 'brave'?", opts: ["Fearful", "Courageous", "Timid", "Nervous"], ans: 1, exp: "'Courageous' is a synonym for 'brave.'" },
+          { q: "What is an antonym for 'clean'?", opts: ["Dirty", "Tidy", "Neat", "Polished"], ans: 0, exp: "'Dirty' is an antonym for 'clean.'" },
+          { q: "What is a synonym for 'quiet'?", opts: ["Noisy", "Loud", "Silent", "Busy"], ans: 2, exp: "'Silent' is a synonym for 'quiet.'" },
+          { q: "What is an antonym for 'happy'?", opts: ["Glad", "Joyful", "Sad", "Cheerful"], ans: 2, exp: "'Sad' is an antonym for 'happy.'" },
+          { q: "What is a synonym for 'old'?", opts: ["Ancient", "New", "Young", "Modern"], ans: 0, exp: "'Ancient' is a synonym for 'old.'" },
+          { q: "What is an antonym for 'bright'?", opts: ["Dull", "Shiny", "Radiant", "Vivid"], ans: 0, exp: "'Dull' is an antonym for 'bright.'" },
+          { q: "What is a synonym for 'begin'?", opts: ["End", "Stop", "Start", "Close"], ans: 2, exp: "'Start' means the same as 'begin,' making it a synonym." },
+          { q: "What is an antonym for 'day'?", opts: ["Morning", "Week", "Month", "Night"], ans: 3, exp: "Night is the opposite of day, making it the antonym." },
+          { q: "What is a synonym for 'angry'?", opts: ["Glad", "Mad", "Happy", "Calm"], ans: 1, exp: "'Mad' is a synonym for 'angry.'" },
+          { q: "What is an antonym for 'early'?", opts: ["Fast", "Late", "Soon", "Quick"], ans: 1, exp: "'Late' – If you are not early, you are late; they are antonyms." },
+          { q: "What is a synonym for 'funny'?", opts: ["Serious", "Boring", "Humorous", "Sad"], ans: 2, exp: "'Humorous' means funny or causing laughter." }
+        ]
+      },
+      {
+        id: 11,
+        title: "Gender",
+        subtitle: "Masculine, feminine, and gender-neutral nouns",
+        questions: [
+          { q: "Which of the following is a masculine noun?", opts: ["Mother", "Sister", "Uncle", "Aunt"], ans: 2, exp: "'Uncle' is a masculine noun." },
+          { q: "Which word is the feminine form of 'King'?", opts: ["Queen", "Prince", "Duke", "Baron"], ans: 0, exp: "'Queen' is the feminine form of 'King.'" },
+          { q: "Which of these is traditionally a feminine noun?", opts: ["Actor", "Waiter", "Nurse", "Policeman"], ans: 2, exp: "'Nurse' is treated as the feminine noun among these options in the exercise." },
+          { q: "What is the feminine form of 'Father'?", opts: ["Mother", "Sister", "Daughter", "Son"], ans: 0, exp: "'Mother' is the feminine form of 'Father.'" },
+          { q: "Which word refers to a male teacher/head?", opts: ["Teacher", "Mistress", "Tutor", "Master"], ans: 3, exp: "'Master' refers to a male teacher (feminine: Mistress)." },
+          { q: "What is the masculine form of 'Goddess'?", opts: ["God", "Angel", "Priest", "King"], ans: 0, exp: "'God' is the masculine form of 'Goddess.'" },
+          { q: "Which of these is a masculine noun?", opts: ["Queen", "Daughter", "Princess", "Prince"], ans: 3, exp: "'Prince' is a masculine noun." },
+          { q: "What is the feminine form of 'Hero'?", opts: ["Heroine", "Villain", "Champion", "Warrior"], ans: 0, exp: "'Heroine' is the feminine form of 'Hero.'" },
+          { q: "Which word is a feminine noun?", opts: ["Emperor", "Queen", "Prince", "Duke"], ans: 1, exp: "'Queen' is a feminine noun." },
+          { q: "Which of the following pairs of words is NOT correctly matched as masculine and feminine forms?", opts: ["Duke - Duchess", "Hero - Heroine", "Stallion - Mare", "None of the above"], ans: 3, exp: "All listed pairs ('Duke - Duchess', 'Hero - Heroine', 'Stallion - Mare') are accurately matched!" },
+          { q: "What is the masculine form of 'Hen'?", opts: ["Cow", "Rooster", "Duck", "Goose"], ans: 1, exp: "Rooster – A rooster is the male version of a hen." },
+          { q: "Which of the following is a gender-neutral noun?", opts: ["King", "Queen", "Parent", "Father"], ans: 2, exp: "'Parent' can refer to either a mother or a father, so it is gender-neutral." },
+          { q: "What is the feminine form of 'Nephew'?", opts: ["Niece", "Aunt", "Cousin", "Sister"], ans: 0, exp: "A niece is the feminine form of nephew." },
+          { q: "Which of these is a pair of masculine and feminine words?", opts: ["Lion - Lioness", "Cat - Dog", "Cow - Goat", "Tiger - Bear"], ans: 0, exp: "'Lion - Lioness' is the exact masculine and feminine pair." },
+          { q: "What is the masculine form of 'Witch'?", opts: ["Wizard", "Sorceress", "Queen", "Elf"], ans: 0, exp: "Wizard – The male version of a witch is called a wizard." }
+        ]
+      },
+      {
+        id: 12,
+        title: "Number",
+        subtitle: "Singular and plural noun forms (regular & irregular)",
+        questions: [
+          { q: "Which is the plural form of 'Book'?", opts: ["Books", "Bookes", "Bookies", "Bokes"], ans: 0, exp: "'Books' is the plural form of 'Book.'" },
+          { q: "What is the singular form of 'Cats'?", opts: ["Cat", "Cates", "Catts", "Catt"], ans: 0, exp: "'Cat' is the singular form of 'Cats.'" },
+          { q: "Which word is plural?", opts: ["Apple", "Mango", "Oranges", "Banana"], ans: 2, exp: "'Oranges' is the plural form of 'Orange.'" },
+          { q: "What is the plural of 'Child'?", opts: ["Childs", "Children", "Childen", "Childrens"], ans: 1, exp: "'Children' is the plural form of 'Child.'" },
+          { q: "Which is the singular form of 'Leaves'?", opts: ["Leaf", "Leafe", "Leef", "Leafs"], ans: 0, exp: "'Leaf' is the singular form of 'Leaves.'" },
+          { q: "What is the plural of 'Foot'?", opts: ["Feets", "Feet", "Foots", "Feetes"], ans: 1, exp: "'Feet' is the plural form of 'Foot.'" },
+          { q: "Which word is singular?", opts: ["Shoes", "Pants", "Shirt", "Socks"], ans: 2, exp: "'Shirt' is the singular form." },
+          { q: "What is the plural of 'Goose'?", opts: ["Gooses", "Geese", "Geeses", "Goosees"], ans: 1, exp: "'Geese' is the plural form of 'Goose.'" },
+          { q: "Which word is singular?", opts: ["Trees", "Leaves", "Flower", "Birds"], ans: 2, exp: "'Flower' is the singular form." },
+          { q: "What is the plural of 'Baby'?", opts: ["Babys", "Babies", "Babyies", "Babyes"], ans: 1, exp: "'Babies' is the plural form of 'Baby.'" },
+          { q: "What is the plural of 'Tooth'?", opts: ["Tooths", "Teeth", "Toothes", "Teeths"], ans: 1, exp: "Teeth – 'Tooth' becomes 'teeth' in plural (irregular plural)." },
+          { q: "Which of these is a singular noun?", opts: ["Pens", "Cars", "Table", "Hats"], ans: 2, exp: "Table – Only 'table' is singular; others are plural forms." },
+          { q: "What is the singular form of 'Mice'?", opts: ["Mice", "Mouse", "Mouses", "Meese"], ans: 1, exp: "Mouse – 'Mice' is the plural form of 'mouse.'" },
+          { q: "Which is the correct plural of 'Man'?", opts: ["Mans", "Men", "Manes", "Manses"], ans: 1, exp: "Men – 'Men' is the plural of 'man.'" },
+          { q: "What is the plural form of 'Tomato'?", opts: ["Tomatoes", "Tomatos", "Tomatooes", "Tomates"], ans: 0, exp: "Tomatoes – Words ending in '-o' often take '-es' in the plural." }
+        ]
+      },
+      {
+        id: 13,
+        title: "Proverbs",
+        subtitle: "Popular sayings and their wise meanings",
+        questions: [
+          { q: "What does the proverb 'A stitch in time saves nine' mean?", opts: ["Delay makes things worse", "Nine stitches are better", "A stitch is always needed", "Time is not important"], ans: 0, exp: "The proverb means fixing a small problem right away can prevent it from becoming a bigger issue." },
+          { q: "What does 'Don't count your chickens before they hatch' mean?", opts: ["Count chickens daily", "Do not make plans based on uncertain outcomes", "Chickens are unreliable", "Count all chickens"], ans: 1, exp: "It means do not assume you will get something before it actually happens." },
+          { q: "What is the meaning of 'Actions speak louder than words'?", opts: ["Words are more important than actions", "Actions are more meaningful than what is said", "Actions should be ignored", "Words should be trusted more"], ans: 1, exp: "It means what people do is more significant than what they say." },
+          { q: "What does 'The early bird catches the worm' imply?", opts: ["Early risers have advantages", "Birds like worms", "All birds catch worms", "Late risers are better"], ans: 0, exp: "It suggests that those who start early will have success." },
+          { q: "What does 'When in Rome, do as the Romans do' mean?", opts: ["Stay away from Romans", "Follow local customs when you are in a new place", "Rome is special", "Ignore local customs"], ans: 1, exp: "It means adapting to the local way of doing things." },
+          { q: "What does 'You can't judge a book by its cover' mean?", opts: ["Covers are important", "Judging things based only on appearances can be misleading", "Books with covers are better", "Judging is always wrong"], ans: 1, exp: "It suggests not to judge something solely by how it looks." },
+          { q: "What does 'A penny saved is a penny earned' mean?", opts: ["Saving money is as good as earning money", "Pennies are not valuable", "Earning money is better", "Saving is not necessary"], ans: 0, exp: "It means saving money is just as important as earning it." },
+          { q: "What does 'Barking up the wrong tree' mean?", opts: ["Barking helps find things", "Looking in the wrong place for something", "Dogs like trees", "Bark is not useful"], ans: 1, exp: "It means making a wrong assumption or pursuing a false lead." },
+          { q: "What does 'Too many cooks spoil the broth' mean?", opts: ["More cooks are better", "Too many people involved can ruin something", "Cooks like broth", "Broth should be made by one person"], ans: 1, exp: "It means having too many people working on a task can lead to problems." },
+          { q: "What does 'Every cloud has a silver lining' mean?", opts: ["Clouds have a special lining", "Every difficult situation has a positive side", "Silver is always present", "Clouds are not important"], ans: 1, exp: "It suggests that even in bad situations, something good can be found." },
+          { q: "What does 'Look before you leap' mean?", opts: ["Jump quickly", "Be careful before taking action", "Don't look at anything", "Leaping is fun"], ans: 1, exp: "This means you should think and plan carefully before doing something." },
+          { q: "What does the proverb 'Honesty is the best policy' mean?", opts: ["Telling lies is helpful", "Being honest is always the right thing to do", "Being clever is better", "Policies are important"], ans: 1, exp: "Telling the truth is the best way to behave." },
+          { q: "What is the meaning of 'Practice makes perfect'?", opts: ["Practice is boring", "You should never practice", "Practicing helps you become better", "No one is perfect"], ans: 2, exp: "If you keep practicing, you'll improve and become perfect." },
+          { q: "What does 'Let sleeping dogs lie' mean?", opts: ["Wake up dogs often", "Don't disturb a situation that is calm", "Dogs should not sleep", "Lie down with dogs"], ans: 1, exp: "Avoid restarting an old conflict or disturbing a peaceful situation." },
+          { q: "What is meant by 'Better late than never'?", opts: ["Being late is always bad", "It's better to never show up", "Being on time doesn't matter", "It's better to do something late than not at all"], ans: 3, exp: "Even if something is delayed, it's good to do it instead of skipping it completely." }
+        ]
+      },
+      {
+        id: 14,
+        title: "Idioms",
+        subtitle: "Figurative expressions and everyday phrases",
+        questions: [
+          { q: "What does the idiom 'Break the ice' mean?", opts: ["Break something frozen", "Start a conversation in a social setting", "Make a drink with ice", "Break an object"], ans: 1, exp: "It means to initiate a conversation in a social situation." },
+          { q: "What does 'Hit the nail on the head' mean?", opts: ["Hammer a nail", "Describe something accurately", "Hit an object", "Nail is damaged"], ans: 1, exp: "It means to be exactly right about something." },
+          { q: "What does 'Let the cat out of the bag' mean?", opts: ["Release a cat", "Reveal a secret", "Put a cat in a bag", "Cat needs help"], ans: 1, exp: "It means to accidentally reveal a secret." },
+          { q: "What does 'Bite the bullet' mean?", opts: ["Bite something hard", "Face a difficult situation bravely", "Use a bullet", "Avoid problems"], ans: 1, exp: "It means to endure a painful or difficult situation with courage." },
+          { q: "What does 'Piece of cake' mean?", opts: ["Cake slice", "Something very easy", "Cake piece", "Delicious cake"], ans: 1, exp: "It means something is very simple or easy to do." },
+          { q: "What does 'Under the weather' mean?", opts: ["Weather conditions", "Feeling ill", "Weather changes", "Not affected by weather"], ans: 1, exp: "It means to feel sick or unwell." },
+          { q: "What does 'Cost an arm and a leg' mean?", opts: ["Very expensive", "Costs body parts", "Cost nothing", "Cheap item"], ans: 0, exp: "It means something is very costly." },
+          { q: "What does 'Spill the beans' mean?", opts: ["Accidentally drop beans", "Reveal information or a secret", "Eat beans", "Cook beans"], ans: 1, exp: "It means to disclose something that was meant to be kept secret." },
+          { q: "What does 'The ball is in your court' mean?", opts: ["You have the next move", "The ball is missing", "Playing a sport", "Court activities"], ans: 0, exp: "It means it is up to you to take action or make a decision." },
+          { q: "What does 'Cry over spilled milk' mean?", opts: ["Cry about milk", "Worry about something that has already happened", "Spill milk", "Milk is important"], ans: 1, exp: "It means to be upset over something that cannot be changed." },
+          { q: "What does the idiom 'Hit the books' mean?", opts: ["Throw the books", "Start studying", "Hit someone with a book", "Close the books"], ans: 1, exp: "This idiom means to begin studying seriously, especially for an exam." },
+          { q: "What does 'Break a leg' mean when someone says it before a performance?", opts: ["Fall down", "Hurt your leg", "Good luck", "Walk slowly"], ans: 2, exp: "People say 'break a leg' to wish someone good luck in a performance." },
+          { q: "What does the idiom 'Hold your horses' mean?", opts: ["Ride the horse", "Be patient", "Let horses go", "Catch the horse"], ans: 1, exp: "'Hold your horses' means to wait or slow down and be patient." },
+          { q: "What does 'On cloud nine' mean?", opts: ["Standing on a cloud", "Very happy", "Flying in the sky", "Sleeping"], ans: 1, exp: "'On cloud nine' is used to describe someone who is feeling extremely happy." },
+          { q: "What does 'Add fuel to the fire' mean?", opts: ["Cook food", "Make a situation worse", "Start a campfire", "Blow out the fire"], ans: 1, exp: "It means making an already bad situation even worse by saying or doing something more." }
+        ]
+      },
+      {
+        id: 15,
+        title: "One-Word Substitutes",
+        subtitle: "Single words replacing descriptive phrases",
+        questions: [
+          { q: "What is a one-word substitute for 'A person who writes books'?", opts: ["Reader", "Editor", "Author", "Publisher"], ans: 2, exp: "An 'Author' is a person who writes books." },
+          { q: "What is a one-word substitute for 'A place where books are kept'?", opts: ["Library", "School", "Bookstore", "Classroom"], ans: 0, exp: "A 'Library' is a place where books are kept." },
+          { q: "What is a one-word substitute for 'A person who repairs shoes'?", opts: ["Carpenter", "Tailor", "Shoemaker", "Plumber"], ans: 2, exp: "A 'Shoemaker' (or cobbler) is someone who repairs shoes." },
+          { q: "What is a one-word substitute for 'A person who studies stars'?", opts: ["Meteorologist", "Biologist", "Geologist", "Astronomer"], ans: 3, exp: "An 'Astronomer' is someone who studies stars." },
+          { q: "What is a one-word substitute for 'A place where medicines are sold'?", opts: ["Pharmacy", "Hospital", "Clinic", "Laboratory"], ans: 0, exp: "A 'Pharmacy' is where medicines are sold." },
+          { q: "What is a one-word substitute for 'A book of maps'?", opts: ["Dictionary", "Atlas", "Novel", "Encyclopedia"], ans: 1, exp: "An 'Atlas' is a book of maps." },
+          { q: "What is a one-word substitute for 'A person who paints pictures'?", opts: ["Painter", "Sculptor", "Musician", "Writer"], ans: 0, exp: "A 'Painter' is someone who paints pictures." },
+          { q: "What is a one-word substitute for 'A place where animals are kept'?", opts: ["Farm", "Zoo", "Park", "Aquarium"], ans: 1, exp: "A 'Zoo' is a place where animals are kept." },
+          { q: "What is a one-word substitute for 'A person who travels to unknown places'?", opts: ["Explorer", "Tourist", "Guide", "Pilot"], ans: 0, exp: "An 'Explorer' travels to unknown places." },
+          { q: "What is a one-word substitute for 'A person who teaches students'?", opts: ["Teacher", "Student", "Principal", "Counselor"], ans: 0, exp: "A 'Teacher' is someone who teaches students." },
+          { q: "What is a one-word substitute for 'A person who drives a car'?", opts: ["Pilot", "Cyclist", "Driver", "Conductor"], ans: 2, exp: "A person who drives a car is called a driver." },
+          { q: "What is a one-word substitute for 'A building where people live'?", opts: ["Library", "House", "Hospital", "School"], ans: 1, exp: "A house is a place where people live." },
+          { q: "What is a one-word substitute for 'A person who delivers letters'?", opts: ["Watchman", "Postman", "Policeman", "Teacher"], ans: 1, exp: "A postman is the person who delivers letters and parcels." },
+          { q: "What is a one-word substitute for 'A place where we go to study'?", opts: ["School", "Office", "Home", "Playground"], ans: 0, exp: "A school is a place where children go to learn." },
+          { q: "What is a one-word substitute for 'A person who flies an airplane'?", opts: ["Driver", "Conductor", "Sailor", "Pilot"], ans: 3, exp: "A pilot is someone who flies an airplane." }
+        ]
+      },
+      {
+        id: 16,
+        title: "Nouns",
+        subtitle: "Common, proper, collective, abstract, and material nouns",
+        questions: [
+          { q: "Which of the following is a common noun?", opts: ["Apple", "Paris", "Sunday", "Eiffel Tower"], ans: 0, exp: "'Apple' is a common noun, while the others are proper nouns." },
+          { q: "Which word is a proper noun?", opts: ["School", "Teacher", "London", "City"], ans: 2, exp: "'London' is a proper noun as it names a specific place." },
+          { q: "Which is a collective noun?", opts: ["Crowd", "Car", "Table", "Chair"], ans: 0, exp: "'Crowd' is a collective noun representing a group of people." },
+          { q: "Which of the following is an abstract noun?", opts: ["Happiness", "Tree", "Dog", "Car"], ans: 0, exp: "'Happiness' is an abstract noun representing a feeling." },
+          { q: "Which of these is a countable noun?", opts: ["Water", "Sand", "Book", "Air"], ans: 2, exp: "'Book' is a countable noun, unlike uncountable nouns like water and sand." },
+          { q: "Which word is a noun?", opts: ["Quickly", "Eat", "Happiness", "Beautiful"], ans: 2, exp: "'Happiness' is a noun, while the others are adjectives, adverbs, or verbs." },
+          { q: "Which of the following words is an abstract noun?", opts: ["Music", "Table", "Ocean", "Mountain"], ans: 0, exp: "An abstract noun represents an idea, quality, or state that cannot be physically touched. 'Music' refers to an art form." },
+          { q: "Which of these is a material noun?", opts: ["Wood", "Teacher", "River", "City"], ans: 0, exp: "'Wood' is a material noun, representing a substance." },
+          { q: "Which is a concrete noun?", opts: ["Desk", "Intelligence", "Freedom", "Courage"], ans: 0, exp: "'Desk' is a concrete noun because it can be seen and touched." },
+          { q: "Which of these is an example of a compound noun?", opts: ["Toothbrush", "Table", "Apple", "School"], ans: 0, exp: "'Toothbrush' is a compound noun made up of two words." },
+          { q: "Which of the following is a proper noun?", opts: ["River", "Animal", "India", "Country"], ans: 2, exp: "India is a proper noun because it names a specific country." },
+          { q: "What type of noun is the word 'team'?", opts: ["Abstract noun", "Collective noun", "Proper noun", "Material noun"], ans: 1, exp: "Team is a collective noun because it refers to a group of people." },
+          { q: "Which word is a common noun?", opts: ["Ganga", "Chair", "Delhi", "John"], ans: 1, exp: "Chair is a common noun used for general items, not a specific name." },
+          { q: "What type of noun is 'milk'?", opts: ["Material noun", "Abstract noun", "Proper noun", "Collective noun"], ans: 0, exp: "Milk is a material/uncountable substance noun." },
+          { q: "Which of the following is a plural noun?", opts: ["Child", "Man", "Chairs", "Woman"], ans: 2, exp: "Chairs is a plural noun—it means more than one chair." }
+        ]
+      },
+      {
+        id: 17,
+        title: "Pronouns",
+        subtitle: "Personal, possessive, reflexive, demonstrative & interrogative pronouns",
+        questions: [
+          { q: "Which is a personal pronoun?", opts: ["He", "This", "Some", "My"], ans: 0, exp: "'He' is a personal pronoun used to refer to someone." },
+          { q: "What is the correct pronoun for 'Sara and I'?", opts: ["She", "They", "We", "He"], ans: 2, exp: "'We' is the pronoun used for 'Sara and I.'" },
+          { q: "Which of the following is a possessive pronoun?", opts: ["His", "Me", "You", "They"], ans: 0, exp: "'His' is a possessive pronoun showing ownership." },
+          { q: "What is the pronoun for 'the dog'?", opts: ["She", "It", "They", "We"], ans: 1, exp: "'It' is the pronoun used for animals or things when the gender is not specified." },
+          { q: "Which pronoun would you use for a group of people including yourself?", opts: ["We", "He", "They", "She"], ans: 0, exp: "'We' is used for a group that includes the speaker." },
+          { q: "What is the reflexive pronoun for 'him'?", opts: ["Itself", "Herself", "Himself", "Themselves"], ans: 2, exp: "'Himself' is the reflexive pronoun for 'him.'" },
+          { q: "Which pronoun is used to refer to a person whose gender is unknown?", opts: ["They", "She", "He", "It"], ans: 0, exp: "'They' is used as a gender-neutral pronoun for a person whose gender is not known." },
+          { q: "What is the correct pronoun for 'the book'?", opts: ["He", "It", "She", "They"], ans: 1, exp: "'It' is used for singular, non-human objects." },
+          { q: "Which pronoun replaces the underlined noun? 'The teacher gave a book to Sarah. <u>Sarah</u> was happy with the gift.'", opts: ["She", "Her", "Them", "They"], ans: 0, exp: "The correct pronoun to replace 'Sarah' here is 'She', as it is the subject performing the action." },
+          { q: "What is the correct pronoun for 'Anna and David'?", opts: ["She", "He", "They", "It"], ans: 2, exp: "'They' is used for 'Anna and David.'" },
+          { q: "Which of the following is a demonstrative pronoun?", opts: ["This", "Him", "Her", "Me"], ans: 0, exp: "'This' is a demonstrative pronoun used to point to something nearby." },
+          { q: "What is the interrogative pronoun in the sentence: 'Who is knocking at the door?'", opts: ["What", "That", "Who", "Which"], ans: 2, exp: "'Who' is used to ask a question about a person, so it is an interrogative pronoun." },
+          { q: "Which of these is an indefinite pronoun?", opts: ["I", "You", "Someone", "He"], ans: 2, exp: "'Someone' is indefinite because it doesn't name a specific person." },
+          { q: "What is the correct reflexive pronoun for 'I'?", opts: ["Myself", "Itself", "Yourself", "Herself"], ans: 0, exp: "'Myself' is the reflexive form of 'I' used when the subject and object are the same." },
+          { q: "What pronoun can replace 'Ravi and his friends'?", opts: ["We", "You", "They", "He"], ans: 2, exp: "'They' is used to replace plural nouns like 'Ravi and his friends.'" }
+        ]
+      },
+      {
+        id: 18,
+        title: "Verbs",
+        subtitle: "Action words, tenses, helping verbs, and states of being",
+        questions: [
+          { q: "What is the base form of the verb 'went'?", opts: ["Go", "Goes", "Going", "Gone"], ans: 0, exp: "'Go' is the base form of the verb 'went.'" },
+          { q: "Which of these is an action verb?", opts: ["Run", "Sad", "Blue", "Tall"], ans: 0, exp: "'Run' is an action verb." },
+          { q: "What is the past form of 'eat'?", opts: ["Eaten", "Eats", "Eating", "Ate"], ans: 3, exp: "'Ate' is the past form of 'eat.'" },
+          { q: "Which verb is used to show possession?", opts: ["Have", "Jump", "Swim", "Dance"], ans: 0, exp: "'Have' is used to show possession." },
+          { q: "What is the future tense of 'write'?", opts: ["Wrote", "Writes", "Writing", "Will write"], ans: 3, exp: "'Will write' is the future tense form of 'write.'" },
+          { q: "Which of these is a verb in the present continuous (-ing) form?", opts: ["Singing", "Sang", "Sing", "Sings"], ans: 0, exp: "'Singing' is the continuous participle form." },
+          { q: "What is the past participle of 'swim'?", opts: ["Swam", "Swim", "Swimming", "Swum"], ans: 3, exp: "'Swum' is the past participle of 'swim.'" },
+          { q: "Which verb is in the simple past tense?", opts: ["Ran", "Running", "Run", "Runs"], ans: 0, exp: "'Ran' is the simple past tense of 'run.'" },
+          { q: "What is the base form of the verb 'sang'?", opts: ["Sing", "Sings", "Singing", "Sang"], ans: 0, exp: "'Sing' is the base form of the verb 'sang.'" },
+          { q: "Which verb indicates a state of being?", opts: ["Is", "Play", "Run", "Eat"], ans: 0, exp: "'Is' is a verb indicating a state of being." },
+          { q: "What is the past tense of 'go'?", opts: ["Gone", "Went", "Going", "Goes"], ans: 1, exp: "'Went' is the past tense of the verb 'go.'" },
+          { q: "Which of the following is a helping (auxiliary) verb?", opts: ["Eat", "Have", "Run", "Play"], ans: 1, exp: "'Have' is a helping verb used with other verbs (e.g., 'have eaten')." },
+          { q: "What is the present tense of 'drank'?", opts: ["Drunk", "Drinking", "Drink", "Drinks"], ans: 2, exp: "'Drink' is the base and present tense form of 'drank.'" },
+          { q: "Which of these words is NOT a verb?", opts: ["Read", "Write", "Book", "Talk"], ans: 2, exp: "'Book' is a noun, not a verb." },
+          { q: "What is the verb in the sentence: 'The dog barked loudly'?", opts: ["Dog", "Barked", "Loudly", "The"], ans: 1, exp: "'Barked' is the action that the dog did, so it's the verb in the sentence." }
+        ]
+      },
+      {
+        id: 19,
+        title: "Adverbs",
+        subtitle: "Words that describe how, when, where, and how often actions happen",
+        questions: [
+          { q: "Which of these is an adverb?", opts: ["Quickly", "Jump", "Chair", "Happiness"], ans: 0, exp: "'Quickly' is an adverb describing how an action is performed." },
+          { q: "What does the adverb 'loudly' describe?", opts: ["When something happens", "How something is done", "Where something happens", "Who does something"], ans: 1, exp: "'Loudly' describes the manner in which an action is done." },
+          { q: "Which word is an adverb of frequency?", opts: ["Often", "Soon", "Happily", "Here"], ans: 0, exp: "'Often' indicates how frequently an action occurs." },
+          { q: "Which adverb tells us about the place?", opts: ["Slowly", "Quickly", "Everywhere", "Yesterday"], ans: 2, exp: "'Everywhere' describes a place or location." },
+          { q: "What type of adverb is 'carefully'?", opts: ["Adverb of manner", "Adverb of time", "Adverb of place", "Adverb of frequency"], ans: 0, exp: "'Carefully' describes how an action is performed (manner)." },
+          { q: "Which adverb answers the question 'When'?", opts: ["Never", "Carefully", "Everywhere", "Tomorrow"], ans: 3, exp: "'Tomorrow' answers the question of when something will happen." },
+          { q: "What is the adverb in the sentence 'She sings beautifully'?", opts: ["Sings", "She", "Beautifully", "The"], ans: 2, exp: "'Beautifully' is the adverb modifying how she sings." },
+          { q: "Which adverb describes the intensity?", opts: ["Now", "Slowly", "Often", "Very"], ans: 3, exp: "'Very' describes the intensity of an adjective or adverb." },
+          { q: "Which of these is an adverb of manner?", opts: ["Tomorrow", "Often", "There", "Well"], ans: 3, exp: "'Well' describes how something is done." },
+          { q: "Which adverb modifies 'speak' in 'speak _____'?", opts: ["Loudly", "She", "Quickly", "Yesterday"], ans: 0, exp: "'Loudly' modifies the verb 'speak,' describing how it is done." },
+          { q: "Which adverb tells us how often something happens?", opts: ["Carefully", "Never", "There", "Loudly"], ans: 1, exp: "'Never' tells how often something happens, so it is an adverb of frequency." },
+          { q: "What kind of adverb is 'outside' in the sentence 'The children are playing outside'?", opts: ["Adverb of manner", "Adverb of place", "Adverb of frequency", "Adverb of time"], ans: 1, exp: "'Outside' tells where the children are playing, making it an adverb of place." },
+          { q: "Which of the following sentences contains an adverb of time?", opts: ["He runs fast.", "We will go home soon.", "They played outside.", "She smiled happily."], ans: 1, exp: "'Soon' tells us when something will happen, so it's an adverb of time." },
+          { q: "Which word is an adverb of manner?", opts: ["Always", "Beautifully", "Tomorrow", "Upstairs"], ans: 1, exp: "'Beautifully' describes how something is done, which makes it an adverb of manner." },
+          { q: "What is the adverb in the sentence: 'He waited patiently for his turn'?", opts: ["Waited", "Patiently", "Turn", "For"], ans: 1, exp: "'Patiently' shows the way (manner) he waited, so it's the adverb in the sentence." }
+        ]
+      },
+      {
+        id: 20,
+        title: "Adjectives",
+        subtitle: "Describing words for quality, color, size, shape, and degrees",
+        questions: [
+          { q: "Which word is an adjective?", opts: ["Beautiful", "Running", "Quickly", "Happily"], ans: 0, exp: "'Beautiful' is an adjective that describes a noun." },
+          { q: "What does the adjective 'tall' describe?", opts: ["How something is done", "The size/height of something", "When something happens", "The place of something"], ans: 1, exp: "'Tall' describes the height or size of a noun." },
+          { q: "Which word is a comparative adjective?", opts: ["Tallest", "Taller", "Tall", "Tallness"], ans: 1, exp: "'Taller' is a comparative adjective comparing two things." },
+          { q: "Which adjective describes color?", opts: ["Well", "Quickly", "Blue", "Tomorrow"], ans: 2, exp: "'Blue' describes the color of a noun." },
+          { q: "What is the superlative form of 'good'?", opts: ["Best", "Better", "Goodest", "Well"], ans: 0, exp: "'Best' is the superlative form of 'good.'" },
+          { q: "Which adjective describes quantity?", opts: ["Loud", "Happy", "Green", "Many"], ans: 3, exp: "'Many' describes the quantity of a noun." },
+          { q: "Which word is an adjective of opinion?", opts: ["Here", "Today", "Slowly", "Interesting"], ans: 3, exp: "'Interesting' is an adjective of opinion describing a noun." },
+          { q: "Which adjective describes shape?", opts: ["Quickly", "Round", "Always", "Beautifully"], ans: 1, exp: "'Round' describes the shape of a noun." },
+          { q: "Which adjective is used for time/age?", opts: ["Ancient", "Soft", "Happy", "Tall"], ans: 0, exp: "'Ancient' describes the time or age of something." },
+          { q: "What is the adjective in the phrase 'a red apple'?", opts: ["Red", "Apple", "A", "The"], ans: 0, exp: "'Red' is the adjective describing the noun 'apple.'" },
+          { q: "Which of these adjectives shows feeling or emotion?", opts: ["Tall", "Angry", "Yellow", "Round"], ans: 1, exp: "'Angry' is an adjective that describes an emotion or feeling." },
+          { q: "What is the comparative form of the adjective 'cold'?", opts: ["Colder", "Coldest", "Coldly", "More cold"], ans: 0, exp: "'Colder' is the correct comparative form of 'cold.'" },
+          { q: "Which adjective describes how something feels to touch?", opts: ["Soft", "Loud", "Smart", "Early"], ans: 0, exp: "'Soft' is an adjective that describes how something feels when touched." },
+          { q: "What is the adjective in the sentence: 'She wore a shiny dress'?", opts: ["She", "Wore", "Shiny", "Dress"], ans: 2, exp: "'Shiny' tells what kind of dress, so it's the adjective." },
+          { q: "Which of these is an adjective of number?", opts: ["Fast", "Three", "Sweet", "Green"], ans: 1, exp: "'Three' tells the number of things, so it's an adjective of number." }
+        ]
+      },
+      {
+        id: 21,
+        title: "Reading Comprehension",
+        subtitle: "All 6 Short Stories & Passages (40 Questions)",
+        questions: [
+          // Passage 1 (10 Questions)
+          { passageId: "p1", q: "What is Tom's favorite activity to do with Max?", opts: ["Reading books", "Going to school", "Playing fetch", "Watching TV"], ans: 2, exp: "The passage describes Tom and Max playing fetch as their favorite activity." },
+          { passageId: "p1", q: "How does Max feel when playing fetch?", opts: ["Sad", "Angry", "Playful", "Sleepy"], ans: 2, exp: "The passage mentions that Max is very playful while running after the ball." },
+          { passageId: "p1", q: "What does Tom do after playing fetch with Max?", opts: ["Goes to bed", "Eats breakfast", "Gives Max a treat", "Goes to school"], ans: 2, exp: "The passage states that Tom gives Max a treat after their game of fetch." },
+          { passageId: "p1", q: "How does Tom feel about spending time with Max?", opts: ["Bored", "Upset", "Happy", "Angry"], ans: 2, exp: "Tom feels that spending time with Max is the best part of his day, indicating he is happy." },
+          { passageId: "p1", q: "Where do Tom and Max go every morning?", opts: ["The supermarket", "The park", "The library", "The beach"], ans: 1, exp: "The passage states that Tom and Max go to the park every morning." },
+          { passageId: "p1", q: "What do Tom and Max do after playing in the park?", opts: ["Watch TV", "Eat dinner", "Walk home together", "Go to bed"], ans: 2, exp: "The passage mentions that Tom and Max walk home after playing." },
+          { passageId: "p1", q: "When do Tom and Max play fetch?", opts: ["At night", "In the afternoon", "In the morning", "During lunch"], ans: 2, exp: "The passage specifies that Tom and Max go to the park every morning." },
+          { passageId: "p1", q: "What is the weather like when Tom and Max play fetch?", opts: ["Rainy", "Snowy", "Sunny", "Cloudy"], ans: 2, exp: "The passage mentions that they play fetch until the sun is high in the sky, implying sunny weather." },
+          { passageId: "p1", q: "What does Tom do with Max’s ball?", opts: ["Throws it", "Hides it", "Throws it away", "Puts it in a box"], ans: 0, exp: "The passage describes Tom throwing the ball for Max to run after." },
+          { passageId: "p1", q: "How long do Tom and Max play fetch?", opts: ["Until it gets dark", "Until the sun is high in the sky", "For just a few minutes", "Until Tom gets tired"], ans: 1, exp: "The passage indicates they play fetch until the sun is high in the sky." },
+          // Passage 2 (5 Questions)
+          { passageId: "p2", q: "What special event is happening for Lisa?", opts: ["Christmas", "A school trip", "Her birthday", "A new school year"], ans: 2, exp: "The passage is about Lisa's birthday celebration." },
+          { passageId: "p2", q: "What does Lisa find in the living room?", opts: ["A new toy", "A big box", "A book", "A puppy"], ans: 1, exp: "Lisa finds a big box in the living room as described in the passage." },
+          { passageId: "p2", q: "What is inside the big box?", opts: ["A teddy bear", "A new bicycle", "A video game", "A pair of shoes"], ans: 1, exp: "The passage reveals that Lisa finds a new bicycle inside the box." },
+          { passageId: "p2", q: "How does Lisa feel about the bicycle?", opts: ["Sad", "Angry", "Thrilled", "Bored"], ans: 2, exp: "Lisa is thrilled and excited when she finds the bicycle." },
+          { passageId: "p2", q: "What does Lisa do after finding the bicycle?", opts: ["Goes back to bed", "Rides it around the yard", "Puts it away in the garage", "Calls her friends"], ans: 1, exp: "Lisa immediately starts riding the new bicycle around the yard." },
+          // Passage 3 (10 Questions)
+          { passageId: "p3", q: "What does Ella enjoy doing in her free time?", opts: ["Reading books", "Gardening", "Playing video games", "Watching movies"], ans: 1, exp: "The passage mentions that Ella loves gardening and spends her weekends working in her garden." },
+          { passageId: "p3", q: "What does Ella notice about her roses?", opts: ["They are growing too quickly", "They are not blooming", "They are turning yellow", "They have too many thorns"], ans: 1, exp: "Ella notices that her roses are not blooming as they should." },
+          { passageId: "p3", q: "How does Ella try to solve the problem with her roses?", opts: ["By watering them more", "By reading a book about rose care", "By planting them in a different garden", "By using a different fertilizer"], ans: 1, exp: "Ella reads a book about rose care to find out what might be wrong with her roses." },
+          { passageId: "p3", q: "What does Ella find out from the book?", opts: ["Roses need more water", "Roses need more sunlight", "Roses need special soil", "Roses need more space"], ans: 1, exp: "The book advises Ella that her roses need more sunlight." },
+          { passageId: "p3", q: "What does Ella do after learning from the book?", opts: ["She changes the soil", "She adjusts the position of the roses", "She adds more water", "She trims the roses"], ans: 1, exp: "Ella adjusts the position of the roses to ensure they get more sunlight." },
+          { passageId: "p3", q: "What is the result after Ella changes the position of the roses?", opts: ["The roses wilt", "The roses grow taller", "The roses start blooming beautifully", "The roses lose their leaves"], ans: 2, exp: "After adjusting their position, the roses begin to bloom beautifully." },
+          { passageId: "p3", q: "How does Ella feel about her garden after the roses start blooming?", opts: ["Disappointed", "Anxious", "Proud", "Worried"], ans: 2, exp: "Ella feels very proud of her garden because the roses are blooming." },
+          { passageId: "p3", q: "What does Ella do on weekends?", opts: ["Goes to the park", "Visits friends", "Works in her garden", "Takes a nap"], ans: 2, exp: "Ella spends her weekends planting flowers, watering the plants, and taking care of her garden." },
+          { passageId: "p3", q: "Why did Ella need to find out more about rose care?", opts: ["Her roses were not growing at all", "Her roses were too small", "Her roses were not blooming as expected", "Her roses were turning brown"], ans: 2, exp: "Ella wanted to find out why her roses were not blooming properly." },
+          { passageId: "p3", q: "What is the main lesson Ella learns from her gardening experience?", opts: ["Gardening is easy", "All plants need the same care", "Understanding plant needs helps them thrive", "Plants grow best in the shade"], ans: 2, exp: "The passage shows that Ella’s understanding of her roses’ need for sunlight helped them bloom successfully." },
+          // Passage 4 (5 Questions)
+          { passageId: "p4", q: "What did Riya see outside the window?", opts: ["Snow", "Sunshine", "Water", "Birds"], ans: 2, exp: "Water – Riya saw water everywhere outside because it was raining." },
+          { passageId: "p4", q: "What did Riya do since she couldn't go out?", opts: ["Took a nap", "Drew pictures", "Watched TV", "Read a book"], ans: 1, exp: "Drew pictures – Since she couldn’t go out, she used crayons to draw." },
+          { passageId: "p4", q: "What did Riya’s mother make for her?", opts: ["Sandwich", "Tea", "Juice", "Warm milk"], ans: 3, exp: "Warm milk – Her mother made her a warm cup of milk while she stayed indoors." },
+          { passageId: "p4", q: "Why did Riya enjoy rainy days?", opts: ["She could go swimming", "She could stay indoors and be creative", "She liked getting wet", "She watched cartoons"], ans: 1, exp: "She could stay indoors and be creative – Riya liked rainy days because she could draw and do fun things inside." },
+          { passageId: "p4", q: "What was NOT something Riya drew?", opts: ["Rainbow", "Clouds", "Crayons", "Umbrella"], ans: 2, exp: "Crayons – She used crayons to draw, but she did not draw crayons." },
+          // Passage 5 (5 Questions)
+          { passageId: "p5", q: "Where was Aarav flying his kite?", opts: ["On the roof", "In the park", "In the open field", "At school"], ans: 2, exp: "In the open field – The passage says Aarav flew his kite in an open field." },
+          { passageId: "p5", q: "What caused the kite to fly away?", opts: ["Aarav pulled the string", "The string broke", "It started raining", "Meera took it"], ans: 1, exp: "The string broke – That’s why the kite flew away and Aarav couldn’t catch it." },
+          { passageId: "p5", q: "How did Aarav feel when he lost his kite?", opts: ["Angry", "Excited", "Sad", "Sleepy"], ans: 2, exp: "Sad – Aarav felt sad when he lost his kite." },
+          { passageId: "p5", q: "Who gave Aarav a new kite?", opts: ["His sister", "His teacher", "Meera", "His father"], ans: 2, exp: "Meera – His friend Meera surprised him with a new kite." },
+          { passageId: "p5", q: "What did Aarav do after getting the new kite?", opts: ["Cried", "Smiled and thanked Meera", "Threw it away", "Broke it again"], ans: 1, exp: "Smiled and thanked Meera – Aarav was happy and thanked her with a big smile." },
+          // Passage 6 (5 Questions)
+          { passageId: "p6", q: "Where is Grandma’s garden located?", opts: ["In front of the house", "Beside the school", "Behind the house", "On the terrace"], ans: 2, exp: "Behind the house – The garden is located behind Grandma’s house." },
+          { passageId: "p6", q: "What does Grandma grow in her garden?", opts: ["Mangoes and apples", "Flowers and vegetables", "Grass and trees", "Only carrots"], ans: 1, exp: "Flowers and vegetables – She grows flowers, tomatoes, and carrots." },
+          { passageId: "p6", q: "What does Grandma do every evening?", opts: ["Sleeps early", "Cooks dinner", "Waters the plants and talks to them", "Watches TV"], ans: 2, exp: "Waters the plants and talks to them – She believes talking to plants helps them grow." },
+          { passageId: "p6", q: "Who helps Grandma in the garden?", opts: ["Her neighbor", "Aanya", "The gardener", "Her son"], ans: 1, exp: "Aanya – Her granddaughter Aanya helps her in the garden." },
+          { passageId: "p6", q: "What do they pick from the garden?", opts: ["Toys", "Fruits", "Leaves", "Fresh vegetables"], ans: 3, exp: "Fresh vegetables – They pick vegetables like tomatoes and carrots." }
+        ]
+      },
+      {
+        id: 22,
+        title: "Spoken and Written Expression",
+        subtitle: "Sentence structure, punctuation, grammar & usage (30 Questions)",
+        questions: [
+          { q: "Which sentence is written correctly?", opts: ["She go to the store yesterday.", "She goes to the store yesterday.", "She went to the store yesterday.", "She going to the store yesterday."], ans: 2, exp: "'Went' is the correct past tense form of 'go.'" },
+          { q: "Choose the correct punctuation for this sentence: 'What time is it'", opts: ["What time is it.", "What time is it!", "What time is it?", "What time is it,"], ans: 2, exp: "A question ends with a question mark." },
+          { q: "What is the main subject noun in the sentence: 'The cat sleeps on the mat'?", opts: ["Cat", "Sleeps", "Mat", "The"], ans: 0, exp: "The subject of the sentence is 'The cat' (Cat)." },
+          { q: "Which word is a noun in this sentence: 'The dog barked loudly'?", opts: ["Dog", "Barked", "Loudly", "The"], ans: 0, exp: "'Dog' is the noun, the name of the animal." },
+          { q: "How would you complete the sentence: 'She likes to eat an ____ for breakfast'?", opts: ["Quickly", "Apple", "Runs", "Beautiful"], ans: 1, exp: "'Apple' is a noun that fits the context of breakfast." },
+          { q: "Which sentence uses the correct present form of the verb?", opts: ["They has a new book.", "They have a new book.", "They hads a new book.", "They having a new book."], ans: 1, exp: "'Have' is the correct form of the verb for the plural subject 'They.'" },
+          { q: "Choose the correct present simple sentence:", opts: ["He don’t like carrots.", "He doesn’t like carrots.", "He not like carrots.", "He don't likes carrots."], ans: 1, exp: "'Doesn't' is the correct contraction for 'does not' with 'He.'" },
+          { q: "Which sentence is in the past tense?", opts: ["She will eat the cake.", "She eats the cake.", "She ate the cake.", "She eating the cake."], ans: 2, exp: "'Ate' is the past tense of 'eat.'" },
+          { q: "What is the correct word to fill in: 'He is ____ happy today'?", opts: ["Very", "More", "A", "Run"], ans: 0, exp: "'Very' is an adverb that describes the degree of happiness." },
+          { q: "Which of these is an adjective?", opts: ["Quickly", "Happiness", "Beautiful", "Swim"], ans: 2, exp: "'Beautiful' is an adjective describing a noun." },
+          { q: "Complete the sentence: 'The book is on ____ table.'", opts: ["An", "A", "The", "Of"], ans: 1, exp: "'A' (or 'The') is a valid article; per the e-book answer key, 'A' is marked for a non-specific table." },
+          { q: "Which sentence is a question?", opts: ["You are coming to the party.", "You will come to the party.", "Are you coming to the party?", "You came to the party."], ans: 2, exp: "This sentence asks a question and ends with a question mark." },
+          { q: "What is the correct way to write the sentence with a contraction: 'I can go to the store, but I can not buy anything'?", opts: ["I can go to the store, but I can't buy anything.", "I can go to the store, but I can not buy anything.", "I can go to the store but I can't buy anything.", "I can go to the store but I can not buy anything."], ans: 0, exp: "'Can't' is the correct contraction for 'cannot,' preceded by a comma before 'but.'" },
+          { q: "Which word is a subject pronoun in the sentence: 'She loves her cat'?", opts: ["Loves", "Her", "Cat", "She"], ans: 3, exp: "'She' is a subject pronoun referring to the person who loves the cat." },
+          { q: "How do you correct the sentence: 'He don’t have any pencils'?", opts: ["He doesn’t have any pencils.", "He don’t has any pencils.", "He doesn’t has any pencils.", "He don’t had any pencils."], ans: 0, exp: "'Doesn't have' is the correct form for 'He.'" },
+          { q: "Which of these sentences is written in the future tense?", opts: ["She was reading a book.", "She reads a book.", "She will read a book.", "She reading a book."], ans: 2, exp: "'Will read' is the future tense form of 'read.'" },
+          { q: "Select the correct sentence:", opts: ["The dog runs quickly.", "The dog run quickly.", "The dog running quickly.", "The dog run quick."], ans: 0, exp: "'Runs' and 'quickly' are correct for describing the dog's action." },
+          { q: "What is the correct form of the verb in the sentence: 'She ____ (write) a letter yesterday'?", opts: ["Writed", "Wrote", "Writes", "Writing"], ans: 1, exp: "'Wrote' is the past tense form of 'write.'" },
+          { q: "Which sentence uses the correct form of 'to be'?", opts: ["They is happy.", "They are happy.", "They be happy.", "They been happy."], ans: 1, exp: "'Are' is the correct form of 'to be' for 'They.'" },
+          { q: "Which sentence uses a contraction?", opts: ["She will not come to the party.", "She won’t come to the party.", "She does not come to the party.", "She did not come to the party."], ans: 1, exp: "'Won’t' is the contraction for 'will not.'" },
+          { q: "What is the correct word to fill in: 'I have ____ apples in the basket'?", opts: ["Much", "Many", "Little", "Any"], ans: 1, exp: "'Many' is used for countable plural nouns like apples." },
+          { q: "Choose the sentence that uses a preposition correctly:", opts: ["The cat is on the table.", "The cat is in the table.", "The cat is under table.", "The cat is on table."], ans: 0, exp: "'On' is the correct preposition for describing the cat’s location on top of the table." },
+          { q: "Which sentence is an imperative sentence?", opts: ["Can you close the door?", "Please close the door.", "You closed the door.", "Closing the door is important."], ans: 1, exp: "Imperative sentences give commands or polite requests." },
+          { q: "Select the sentence with correct plural subject-verb agreement:", opts: ["The teachers is helpful.", "The teacher are helpful.", "The teacher am helpful.", "The teachers are helpful."], ans: 3, exp: "'Teachers' (plural) correctly pairs with 'are.'" },
+          { q: "Which of these sentences contains a simile?", opts: ["She runs fast.", "Her voice is like music.", "He is a good student.", "They play soccer."], ans: 1, exp: "A simile compares two things using 'like' or 'as.'" },
+          { q: "What is the correct punctuation for this sentence: 'I am so excited'", opts: ["I am so excited?", "I am so excited.", "I am so excited!", "I am so excited,"], ans: 2, exp: "I am so excited! – This sentence expresses strong feeling, so an exclamation mark is correct." },
+          { q: "Choose the sentence that is written correctly:", opts: ["Me and my friend goes to school.", "My friend and me go to school.", "My friend and I go to school.", "I and my friend going to school."], ans: 2, exp: "My friend and I go to school. – 'I' is used instead of 'me' when it's part of the subject." },
+          { q: "Which word would best complete this sentence: 'The sky is ____ today.'", opts: ["Running", "Blue", "Quickly", "Softly"], ans: 1, exp: "Blue – 'Blue' is an adjective describing the sky." },
+          { q: "Which word is incorrect in the sentence: 'She brang her lunch to school'?", opts: ["She", "Brang", "Lunch", "School"], ans: 1, exp: "Brang – The correct past tense of 'bring' is 'brought', not 'brang'." },
+          { q: "What type of sentence is this: 'Wow, that was amazing!'", opts: ["Declarative", "Imperative", "Interrogative", "Exclamatory"], ans: 3, exp: "Exclamatory – 'Wow, that was amazing!' shows strong emotion, making it an exclamatory sentence." }
+        ]
+      },
+      {
+        id: 23,
+        title: "Higher Order Thinking Skills (HOTS)",
+        subtitle: "Critical thinking, comprehension, picture analysis & grammar mastery (30 Questions)",
+        questions: [
+          { q: "What is the antonym of the word 'complex'?", opts: ["Difficult", "Simple", "Complicated", "Confusing"], ans: 1, exp: "The antonym of 'complex' is 'simple,' as 'simple' means easy to understand or not complicated." },
+          { q: "Which sentence uses the word 'went' with a past time marker correctly?", opts: ["I went to the park yesterday.", "We go to the beach every summer.", "She go home after school.", "They going swimming in the pool."], ans: 0, exp: "'Went' is the past tense of 'go' used accurately with 'yesterday' in sentence (a)." },
+          { q: "What is the meaning of the word 'giggles'?", opts: ["To cry loudly", "To laugh softly", "To run quickly", "To sleep soundly"], ans: 1, exp: "'Giggles' describes a light, soft, happy laughter." },
+          { q: "Find the rhyming word for 'cat':", opts: ["Dog", "Hat", "Ball", "Tree"], ans: 1, exp: "'Cat' and 'hat' rhyme because they share similar ending sounds (-at)." },
+          { q: "Which sentence uses a question mark correctly?", opts: ["I love pizza", "My favorite color is blue.", "We are playing a game.", "Can you help me, please?"], ans: 3, exp: "A question mark is used at the end of a sentence that asks a question." },
+          { q: "Read the passage: 'The children played outside all day. They built a sandcastle and chased butterflies.' What is the main idea of the passage?", opts: ["The children went to school.", "The children had fun playing outside.", "The children built a house.", "The children saw butterflies."], ans: 1, exp: "The passage describes the children's outdoor activities, showing they had fun playing outside." },
+          { q: "Which of these words describes the weather?", opts: ["Big", "Sunny", "Hungry", "Jump"], ans: 1, exp: "'Sunny' describes a bright and clear day." },
+          { q: "Fill in the blank with the most appropriate singular option: 'The girl is wearing a red _____, but she has a different color for the other items.'", opts: ["shirt", "shoes", "socks", "all of the above"], ans: 0, exp: "Because the article 'a' precedes 'red _____', a singular noun ('shirt') is required rather than plural 'shoes' or 'socks'." },
+          { q: "What is the plural of 'mouse' (Note: check standard vs e-book options)?", opts: ["Mouses", "Meeses", "Mousies", "Mice / Mooses"], ans: 3, exp: "The true irregular plural of 'mouse' is 'mice' (the e-book printed 'Mooses' as option d)." },
+          { q: "Which sentence uses the indefinite article 'a' correctly?", opts: ["I saw a apple at the store.", "I ate a apple yesterday.", "There is a apple on the table.", "I would like a slice of apple pie for dessert."], ans: 3, exp: "The article 'a' is used before consonant sounds ('a slice'), whereas 'apple' begins with a vowel sound and takes 'an'." },
+          { q: "What is the past participle of 'eat'?", opts: ["Eated", "Eaten", "Eateds", "Eateth"], ans: 1, exp: "'Eaten' is the past participle of 'eat' (past simple: 'ate')." },
+          { q: "Choose the correct collective noun for a group of birds:", opts: ["Pack", "Herd", "Flock", "Bunch"], ans: 2, exp: "'Flock' is a collective noun specifically for birds." },
+          { q: "Complete the sentence: 'He _____ books every evening.' (or 'He likes to ____ books')", opts: ["read", "reading", "readed", "reads"], ans: 0, exp: "After 'likes to', we use the base infinitive form 'read'." },
+          { q: "What is the synonym of 'big'?", opts: ["Small", "Tiny", "Large", "Short"], ans: 2, exp: "'Large' has a similar meaning to 'big.'" },
+          { q: "What is the antonym of 'hot'?", opts: ["Warm", "Cold", "Lukewarm", "Steamy"], ans: 1, exp: "'Cold' is the opposite of 'hot.'" },
+          { q: "Which word describes something that is colorful and vivid?", opts: ["Bright", "Dull", "Soft", "Rough"], ans: 0, exp: "'Bright' suggests something with vivid, strong colors." },
+          { q: "What does 'carefully' mean?", opts: ["Loudly", "Slowly and with attention", "Quickly", "Happily"], ans: 1, exp: "'Carefully' means doing something with caution and focus." },
+          { q: "What is the meaning of 'whisper'?", opts: ["To shout loudly", "To speak softly", "To sing", "To laugh"], ans: 1, exp: "'Whisper' describes speaking very quietly/softly." },
+          { q: "Read the passage: 'Sarah has a red bike. She likes to ride it to the park.' What color is Sarah's bike?", opts: ["Blue", "Red", "Green", "Yellow"], ans: 1, exp: "The passage directly mentions Sarah's bike is red." },
+          { illustration: "iceCream", q: "Look at the picture of two girls eating ice cream. What is happening in the picture?", opts: ["The girl is eating ice cream alone.", "The girl is sharing/enjoying ice cream with a friend.", "The girl is buying ice cream.", "The girl is dropping ice cream."], ans: 1, exp: "The picture shows two girls sitting together enjoying ice cream cones with a friend." },
+          { q: "What is the main idea of the following sentence: 'It is raining outside.'", opts: ["The weather is cold.", "The sun is shining.", "The weather is wet.", "The sky is blue."], ans: 2, exp: "The sentence directly tells us it is raining, indicating wet weather." },
+          { q: "Read the story: 'The cat chased the ball of yarn around the living room. It swatted at it with its paw and batted it under the couch.' What is happening in the story?", opts: ["The cat is sleeping.", "The cat is playing with a ball of yarn.", "The cat is looking for food.", "The cat is lost."], ans: 1, exp: "The passage describes the cat chasing, swatting, and batting the yarn, showing it is playing." },
+          { illustration: "beachSunny", q: "Look at the picture of children playing at the beach. Based on the picture, what is the weather like?", opts: ["Rainy", "Sunny", "Snowy", "Cloudy"], ans: 1, exp: "The bright sun, clear blue sky, and beach umbrella show that the weather is sunny." },
+          { q: "Identify the complete predicate/sentence fragment that has a clear verb action:", opts: ["Playing outside", "The happy dog", "He jumped over the fence.", "Red and yellow"], ans: 2, exp: "A complete sentence expresses a full thought with a subject and verb ('He jumped over the fence.')." },
+          { q: "What punctuation mark comes at the end of a declarative sentence?", opts: ["?", "!", ".", ","], ans: 2, exp: "A period (.) is used at the end of a declarative sentence that makes a statement." },
+          { q: "Choose the correct pronoun to complete the sentence: 'Ben likes to read books. __ enjoys mysteries the most.'", opts: ["We", "He", "She", "They"], ans: 1, exp: "'He' refers back to the singular male subject 'Ben.'" },
+          { q: "Which sentence uses the present continuous tense correctly?", opts: ["I play football every day.", "I played football yesterday.", "I am playing football now.", "I will play football tomorrow."], ans: 2, exp: "Present continuous tense ('am playing') describes an action happening right now." },
+          { q: "What is the singular form of 'pencils'?", opts: ["Pencil", "Pens", "Pencilses", "Pencilie"], ans: 0, exp: "'Pencil' is the singular form of 'pencils.'" },
+          { q: "Complete the sentence: 'The children are laughing ____.'", opts: ["happy", "happily", "happiness", "happier"], ans: 1, exp: "Adverbs modify verbs, so 'happily' describes how the children are laughing." },
+          { q: "What is the opposite of 'before'?", opts: ["After", "During", "Since", "Sometimes"], ans: 0, exp: "'Before' indicates something happening earlier, while 'after' means later." }
+        ]
+      }
+    ];
+
+    // =========================================================================
+    // STATE MANAGEMENT & LOCAL STORAGE
+    // =========================================================================
+    const STORAGE_KEY = 'class3_english_olympiad_progress_v1';
+    let userProgress = loadProgress();
+    let currentFilter = 'all';
+
+    // Active Test Session State
+    let activeTest = {
+      isMock: false,
+      topicId: null,
+      title: "",
+      questions: [],
+      currentIndex: 0,
+      answers: {},       // { qIndex: selectedOptionIndex }
+      visited: {},       // { qIndex: true }
+      marked: {},        // { qIndex: true }
+      instantCheck: false,
+      timerSeconds: 0,
+      initialSeconds: 0,
+      timerInterval: null,
+      isPaused: false,
+      passageCollapsed: false
+    };
+
+    function loadProgress() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function saveProgress() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(userProgress));
+      } catch (e) {
+        console.warn("Could not save progress to localStorage");
+      }
+      updateHeaderStats();
+    }
+
+    function updateHeaderStats() {
+      let completedTopics = 0;
+      let totalCorrectQs = 0;
+      EBOOK_CHAPTERS.forEach(ch => {
+        const rec = userProgress[ch.id];
+        if (rec && rec.completed) {
+          completedTopics++;
+          totalCorrectQs += rec.bestScore || 0;
+        }
+      });
+      document.getElementById('hdrCompletedCount').textContent = `${completedTopics} / ${EBOOK_CHAPTERS.length}`;
+      document.getElementById('hdrSolvedCount').textContent = `${totalCorrectQs} / 400`;
+    }
+
+    // =========================================================================
+    // VIEW SWITCHING & DASHBOARD RENDERING
+    // =========================================================================
+    function showView(viewId) {
+      ['dashboardView', 'testView', 'resultView'].forEach(id => {
+        document.getElementById(id).classList.add('hidden');
+      });
+      document.getElementById(viewId).classList.remove('hidden');
+
+      const btnDash = document.getElementById('btnHeaderDashboard');
+      if (viewId === 'dashboardView') {
+        btnDash.classList.add('hidden');
+      } else {
+        btnDash.classList.remove('hidden');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goToDashboard() {
+      if (!document.getElementById('testView').classList.contains('hidden')) {
+        confirmExitTest();
+        return;
+      }
+      stopTimer();
+      renderTopicCards();
+      showView('dashboardView');
+    }
+
+    function setTopicFilter(filter) {
+      currentFilter = filter;
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('bg-[#0B2545]', 'text-white');
+        btn.classList.add('bg-slate-100', 'text-slate-700');
+      });
+      const activeBtn = document.getElementById(`filter-${filter}`);
+      activeBtn.classList.remove('bg-slate-100', 'text-slate-700');
+      activeBtn.classList.add('bg-[#0B2545]', 'text-white');
+      renderTopicCards();
+    }
+
+    function renderTopicCards() {
+      const grid = document.getElementById('topicsGrid');
+      const searchVal = (document.getElementById('topicSearchInput').value || '').toLowerCase().trim();
+      grid.innerHTML = '';
+
+      EBOOK_CHAPTERS.forEach(ch => {
+        const rec = userProgress[ch.id];
+        const isDone = rec && rec.completed;
+
+        if (currentFilter === 'completed' && !isDone) return;
+        if (currentFilter === 'pending' && isDone) return;
+        if (searchVal && !ch.title.toLowerCase().includes(searchVal) && !ch.subtitle.toLowerCase().includes(searchVal) && !String(ch.id).includes(searchVal)) {
+          return;
+        }
+
+        const qCount = ch.questions.length;
+        const bestScore = isDone ? rec.bestScore : 0;
+        const pct = isDone ? Math.round((bestScore / qCount) * 100) : 0;
+
+        const card = document.createElement('div');
+        card.className = "bg-white rounded-2xl p-5 border border-slate-200/90 shadow-xs hover:shadow-md hover:border-blue-300 transition flex flex-col justify-between gap-4";
+        card.innerHTML = `
+          <div class="space-y-2.5">
+            <div class="flex items-center justify-between gap-2">
+              <span class="px-2.5 py-1 rounded-lg bg-[#0B2545] text-amber-400 text-xs font-extrabold">
+                Topic ${ch.id}
+              </span>
+              ${isDone
+                ? `<span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold flex items-center gap-1">
+                     ✓ Best: ${bestScore}/${qCount} (${pct}%)
+                   </span>`
+                : `<span class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 text-xs font-semibold">
+                     ${qCount} Questions
+                   </span>`
+              }
+            </div>
+            <div>
+              <h3 class="text-base sm:text-lg font-extrabold text-slate-900 leading-snug">${ch.title}</h3>
+              <p class="text-xs text-slate-500 mt-1 line-clamp-2">${ch.subtitle}</p>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-3">
+            <span class="text-xs font-semibold text-slate-500">
+              ⏱ ${qCount} Mins • ${qCount} Qs
+            </span>
+            <button onclick="startTopicTest(${ch.id})" class="px-4 py-2 rounded-xl ${isDone ? 'bg-blue-50 hover:bg-blue-100 text-blue-800' : 'bg-amber-500 hover:bg-amber-400 text-[#0B2545]'} font-extrabold text-xs transition">
+              ${isDone ? 'Practice Again →' : 'Start Topic →'}
+            </button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      if (grid.innerHTML === '') {
+        grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-500 font-medium">No matching topics found. Try clearing your search filter.</div>`;
+      }
+    }
+
+    // =========================================================================
+    // STARTING A TOPIC TEST OR FULL MOCK TEST
+    // =========================================================================
+    function startTopicTest(topicId) {
+      const chapter = EBOOK_CHAPTERS.find(c => c.id === topicId);
+      if (!chapter) return;
+
+      const mins = chapter.questions.length; // 1 min per question
+      initTestSession({
+        isMock: false,
+        topicId: chapter.id,
+        title: `${chapter.id}. ${chapter.title}`,
+        questions: chapter.questions,
+        durationSeconds: mins * 60
+      });
+    }
+
+    function startFullMockTest() {
+      // Pick balanced questions across all 23 chapters (35 questions total)
+      const mockQs = [];
+      EBOOK_CHAPTERS.forEach(ch => {
+        const countToPick = ch.id >= 21 ? 3 : 1;
+        const shuffled = [...ch.questions].sort(() => 0.5 - Math.random());
+        shuffled.slice(0, countToPick).forEach(q => {
+          mockQs.push({ ...q, q: `[${ch.title}] ${q.q}` });
+        });
+      });
+
+      initTestSession({
+        isMock: true,
+        topicId: null,
+        title: "Full Olympiad Mock Test (All 23 Topics)",
+        questions: mockQs,
+        durationSeconds: 40 * 60
+      });
+    }
+
+    function initTestSession({ isMock, topicId, title, questions, durationSeconds }) {
+      stopTimer();
+      activeTest = {
+        isMock,
+        topicId,
+        title,
+        questions,
+        currentIndex: 0,
+        answers: {},
+        visited: { 0: true },
+        marked: {},
+        instantCheck: document.getElementById('instantCheckToggle').checked,
+        timerSeconds: durationSeconds,
+        initialSeconds: durationSeconds,
+        timerInterval: null,
+        isPaused: false,
+        passageCollapsed: false
+      };
+
+      document.getElementById('testTopicBadge').textContent = isMock ? "Full Mock" : `Chapter ${topicId} of 23`;
+      document.getElementById('testTopicTitle').textContent = title;
+      document.getElementById('paletteTotalBadge').textContent = `${questions.length} Questions`;
+      document.getElementById('btnTimerToggle').textContent = "Pause";
+
+      startTimer();
+      renderQuestion();
+      renderPalette();
+      showView('testView');
+    }
+
+    // =========================================================================
+    // TIMER CONTROLS
+    // =========================================================================
+    function startTimer() {
+      updateTimerDisplay();
+      activeTest.timerInterval = setInterval(() => {
+        if (activeTest.isPaused) return;
+        activeTest.timerSeconds--;
+        updateTimerDisplay();
+        if (activeTest.timerSeconds <= 0) {
+          stopTimer();
+          finishAndGradeTest();
+        }
+      }, 1000);
+    }
+
+    function stopTimer() {
+      if (activeTest.timerInterval) {
+        clearInterval(activeTest.timerInterval);
+        activeTest.timerInterval = null;
+      }
+    }
+
+    function toggleTimerPause() {
+      activeTest.isPaused = !activeTest.isPaused;
+      document.getElementById('btnTimerToggle').textContent = activeTest.isPaused ? "Resume" : "Pause";
+    }
+
+    function updateTimerDisplay() {
+      const s = Math.max(0, activeTest.timerSeconds);
+      const mins = Math.floor(s / 60);
+      const secs = s % 60;
+      document.getElementById('timerDisplay').textContent =
+        `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }
+
+    // =========================================================================
+    // QUESTION & PALETTE RENDERING
+    // =========================================================================
+    function renderQuestion() {
+      const idx = activeTest.currentIndex;
+      const total = activeTest.questions.length;
+      const item = activeTest.questions[idx];
+      activeTest.visited[idx] = true;
+
+      document.getElementById('testQuestionCounter').textContent = `Question ${idx + 1} of ${total}`;
+      document.getElementById('qNumberLabel').textContent = `Question ${idx + 1}`;
+      document.getElementById('questionText').innerHTML = item.q;
+      document.getElementById('btnPrev').disabled = idx === 0;
+
+      // Reading Passage Handling
+      const passageBox = document.getElementById('passageContainer');
+      if (item.passageId && PASSAGES[item.passageId]) {
+        const p = PASSAGES[item.passageId];
+        passageBox.classList.remove('hidden');
+        document.getElementById('passageTitle').textContent = p.title;
+        const pBody = document.getElementById('passageBody');
+        pBody.textContent = p.text;
+        pBody.classList.toggle('hidden', activeTest.passageCollapsed);
+        document.getElementById('btnCollapsePassage').textContent = activeTest.passageCollapsed ? "Show Passage" : "Hide Passage";
+      } else {
+        passageBox.classList.add('hidden');
+      }
+
+      // Picture Illustration Handling (HOTS Q20 & Q23)
+      const illusBox = document.getElementById('questionIllustration');
+      if (item.illustration && SVG_ILLUSTRATIONS[item.illustration]) {
+        illusBox.classList.remove('hidden');
+        illusBox.innerHTML = SVG_ILLUSTRATIONS[item.illustration];
+      } else {
+        illusBox.classList.add('hidden');
+        illusBox.innerHTML = '';
+      }
+
+      // Render Options
+      const optionsList = document.getElementById('optionsList');
+      optionsList.innerHTML = '';
+      const letters = ['A', 'B', 'C', 'D'];
+      const selectedOpt = activeTest.answers[idx];
+
+      item.opts.forEach((optText, oIdx) => {
+        const isSelected = selectedOpt === oIdx;
+        let cardStyle = "border-slate-200 hover:border-blue-400 hover:bg-blue-50/40";
+        let badgeStyle = "bg-slate-100 text-slate-700";
+
+        if (activeTest.instantCheck && selectedOpt !== undefined) {
+          if (oIdx === item.ans) {
+            cardStyle = "border-emerald-500 bg-emerald-50 ring-2 ring-emerald-200";
+            badgeStyle = "bg-emerald-600 text-white";
+          } else if (isSelected && oIdx !== item.ans) {
+            cardStyle = "border-rose-500 bg-rose-50 ring-2 ring-rose-200";
+            badgeStyle = "bg-rose-600 text-white";
+          }
+        } else if (isSelected) {
+          cardStyle = "border-blue-600 bg-blue-50/80 ring-2 ring-blue-200";
+          badgeStyle = "bg-[#0B2545] text-amber-400";
+        }
+
+        const btn = document.createElement('button');
+        btn.type = "button";
+        btn.onclick = () => selectOption(oIdx);
+        btn.className = `w-full text-left p-4 rounded-xl border-2 transition flex items-center gap-3.5 ${cardStyle}`;
+        btn.innerHTML = `
+          <span class="w-8 h-8 rounded-lg flex items-center justify-center font-extrabold text-sm shrink-0 ${badgeStyle}">
+            ${letters[oIdx]}
+          </span>
+          <span class="text-sm sm:text-base font-semibold text-slate-800">${optText}</span>
+        `;
+        optionsList.appendChild(btn);
+      });
+
+      // Instant Answer Explanation Box
+      const expBox = document.getElementById('instantExplanationBox');
+      if (activeTest.instantCheck && selectedOpt !== undefined) {
+        const isCorrect = selectedOpt === item.ans;
+        expBox.classList.remove('hidden', 'bg-emerald-50', 'border-emerald-200', 'bg-rose-50', 'border-rose-200');
+        expBox.classList.add(isCorrect ? 'bg-emerald-50' : 'bg-rose-50', isCorrect ? 'border-emerald-200' : 'border-rose-200');
+        document.getElementById('instantResultHeader').innerHTML = isCorrect
+          ? `<span class="text-emerald-700">✓ Great job! That's correct.</span>`
+          : `<span class="text-rose-700">✗ Not quite! Correct Answer: (${letters[item.ans]}) ${item.opts[item.ans]}</span>`;
+        document.getElementById('instantExplanationText').textContent = item.exp;
+      } else {
+        expBox.classList.add('hidden');
+      }
+    }
+
+    function togglePassageCollapse() {
+      activeTest.passageCollapsed = !activeTest.passageCollapsed;
+      renderQuestion();
+    }
+
+    function toggleInstantMode() {
+      activeTest.instantCheck = document.getElementById('instantCheckToggle').checked;
+      renderQuestion();
+    }
+
+    function selectOption(oIdx) {
+      activeTest.answers[activeTest.currentIndex] = oIdx;
+      renderQuestion();
+      renderPalette();
+    }
+
+    function clearResponse() {
+      delete activeTest.answers[activeTest.currentIndex];
+      renderQuestion();
+      renderPalette();
+    }
+
+    function saveAndNext() {
+      delete activeTest.marked[activeTest.currentIndex];
+      if (activeTest.currentIndex < activeTest.questions.length - 1) {
+        activeTest.currentIndex++;
+      }
+      renderQuestion();
+      renderPalette();
+    }
+
+    function markForReviewAndNext() {
+      activeTest.marked[activeTest.currentIndex] = true;
+      if (activeTest.currentIndex < activeTest.questions.length - 1) {
+        activeTest.currentIndex++;
+      }
+      renderQuestion();
+      renderPalette();
+    }
+
+    function prevQuestion() {
+      if (activeTest.currentIndex > 0) {
+        activeTest.currentIndex--;
+        renderQuestion();
+        renderPalette();
+      }
+    }
+
+    function jumpToQuestion(idx) {
+      activeTest.currentIndex = idx;
+      renderQuestion();
+      renderPalette();
+    }
+
+    function renderPalette() {
+      const grid = document.getElementById('questionPaletteGrid');
+      grid.innerHTML = '';
+
+      let cntAns = 0, cntNotAns = 0, cntNotVis = 0, cntMark = 0;
+
+      activeTest.questions.forEach((_, idx) => {
+        const isVisited = !!activeTest.visited[idx];
+        const hasAns = activeTest.answers[idx] !== undefined;
+        const isMarked = !!activeTest.marked[idx];
+
+        let statusClass = 'palette-not-visited';
+        if (!isVisited) {
+          cntNotVis++;
+          statusClass = 'palette-not-visited';
+        } else if (hasAns && isMarked) {
+          cntMark++;
+          cntAns++;
+          statusClass = 'palette-answered-marked';
+        } else if (isMarked) {
+          cntMark++;
+          statusClass = 'palette-marked';
+        } else if (hasAns) {
+          cntAns++;
+          statusClass = 'palette-answered';
+        } else {
+          cntNotAns++;
+          statusClass = 'palette-not-answered';
+        }
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.onclick = () => jumpToQuestion(idx);
+        btn.textContent = idx + 1;
+        btn.className = `h-9 w-full font-bold text-xs transition flex items-center justify-center ${statusClass} ${idx === activeTest.currentIndex ? 'palette-active' : ''}`;
+        grid.appendChild(btn);
+      });
+
+      document.getElementById('cntAnswered').textContent = cntAns;
+      document.getElementById('cntNotAnswered').textContent = cntNotAns;
+      document.getElementById('cntNotVisited').textContent = cntNotVis;
+      document.getElementById('cntMarked').textContent = cntMark;
+    }
+
+    // =========================================================================
+    // SUBMISSION, SCORECARD & REVIEW
+    // =========================================================================
+    let lastCompletedResult = null;
+
+    function openSubmitModal() {
+      const total = activeTest.questions.length;
+      const answered = Object.keys(activeTest.answers).length;
+      const unanswered = total - answered;
+
+      const statsDiv = document.getElementById('modalStats');
+      statsDiv.classList.remove('hidden');
+      statsDiv.innerHTML = `
+        <div class="flex justify-between"><span>Total Questions:</span><strong>${total}</strong></div>
+        <div class="flex justify-between text-emerald-700"><span>Answered:</span><strong>${answered}</strong></div>
+        <div class="flex justify-between text-rose-600"><span>Unanswered:</span><strong>${unanswered}</strong></div>
+      `;
+
+      showCustomModal(
+        "Submit Test?",
+        "Are you ready to submit your answers and view your detailed scorecard?",
+        () => {
+          closeModal();
+          finishAndGradeTest();
+        }
+      );
+    }
+
+    function confirmExitTest() {
+      document.getElementById('modalStats').classList.add('hidden');
+      showCustomModal(
+        "Leave Current Test?",
+        "Your current test progress will not be saved if you exit now. Return to the topic dashboard?",
+        () => {
+          closeModal();
+          stopTimer();
+          renderTopicCards();
+          showView('dashboardView');
+        }
+      );
+    }
+
+    function openResetModal() {
+      document.getElementById('modalStats').classList.add('hidden');
+      showCustomModal(
+        "Reset All Progress?",
+        "This will clear your saved scores and completion badges for all 23 chapters. Do you want to continue?",
+        () => {
+          userProgress = {};
+          saveProgress();
+          renderTopicCards();
+          closeModal();
+        }
+      );
+    }
+
+    function finishAndGradeTest() {
+      stopTimer();
+      const total = activeTest.questions.length;
+      let correct = 0;
+      let incorrect = 0;
+      let unattempted = 0;
+
+      activeTest.questions.forEach((item, idx) => {
+        const userAns = activeTest.answers[idx];
+        if (userAns === undefined) {
+          unattempted++;
+        } else if (userAns === item.ans) {
+          correct++;
+        } else {
+          incorrect++;
+        }
+      });
+
+      const accuracy = total > 0 ? Math.round((correct / total) * 100) : 0;
+      const timeUsed = Math.max(1, activeTest.initialSeconds - activeTest.timerSeconds);
+      const mins = Math.floor(timeUsed / 60);
+      const secs = timeUsed % 60;
+      const timeStr = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+      // Save progress for chapter tests
+      if (!activeTest.isMock && activeTest.topicId) {
+        const prev = userProgress[activeTest.topicId];
+        const bestScore = prev ? Math.max(prev.bestScore || 0, correct) : correct;
+        userProgress[activeTest.topicId] = {
+          completed: true,
+          bestScore,
+          lastScore: correct,
+          total
+        };
+        saveProgress();
+      }
+
+      lastCompletedResult = {
+        isMock: activeTest.isMock,
+        topicId: activeTest.topicId,
+        title: activeTest.title,
+        questions: activeTest.questions,
+        answers: { ...activeTest.answers }
+      };
+
+      // Populate Scorecard UI
+      document.getElementById('resTopicTitle').textContent = `${activeTest.title} — Scorecard`;
+      document.getElementById('resScore').textContent = `${correct} / ${total}`;
+      document.getElementById('resAccuracy').textContent = `${accuracy}%`;
+      document.getElementById('resCorrect').textContent = correct;
+      document.getElementById('resIncorrect').textContent = incorrect;
+      document.getElementById('resTime').textContent = timeStr;
+
+      let msg = "Keep practicing! Every mistake is a step toward mastery.";
+      if (accuracy >= 90) msg = "Outstanding Olympiad Champion! Your English skills are super sharp!";
+      else if (accuracy >= 70) msg = "Great job! Review the explanations below to reach 100%.";
+      document.getElementById('resEncouragement').textContent = msg;
+
+      const btnNext = document.getElementById('btnNextTopic');
+      if (!activeTest.isMock && activeTest.topicId < 23) {
+        btnNext.classList.remove('hidden');
+      } else {
+        btnNext.classList.add('hidden');
+      }
+
+      filterReview('all');
+      showView('resultView');
+    }
+
+    function retakeCurrentTopic() {
+      if (!lastCompletedResult) return;
+      if (lastCompletedResult.isMock) {
+        startFullMockTest();
+      } else {
+        startTopicTest(lastCompletedResult.topicId);
+      }
+    }
+
+    function startNextTopic() {
+      if (lastCompletedResult && !lastCompletedResult.isMock && lastCompletedResult.topicId < 23) {
+        startTopicTest(lastCompletedResult.topicId + 1);
+      }
+    }
+
+    function filterReview(mode) {
+      document.querySelectorAll('.rev-filter').forEach(btn => {
+        btn.classList.remove('bg-[#0B2545]', 'text-white');
+        btn.classList.add('bg-white', 'border', 'border-slate-200', 'text-slate-700');
+      });
+      const activeBtn = document.getElementById(`rev-${mode}`);
+      activeBtn.classList.remove('bg-white', 'border', 'border-slate-200', 'text-slate-700');
+      activeBtn.classList.add('bg-[#0B2545]', 'text-white');
+
+      const list = document.getElementById('reviewList');
+      list.innerHTML = '';
+      const letters = ['A', 'B', 'C', 'D'];
+
+      lastCompletedResult.questions.forEach((item, idx) => {
+        const userAns = lastCompletedResult.answers[idx];
+        const isUnattempted = userAns === undefined;
+        const isCorrect = !isUnattempted && userAns === item.ans;
+
+        if (mode === 'incorrect' && (isCorrect || isUnattempted)) return;
+        if (mode === 'unattempted' && !isUnattempted) return;
+
+        const badge = isCorrect
+          ? `<span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">✓ Correct</span>`
+          : isUnattempted
+            ? `<span class="px-2.5 py-1 rounded-full bg-slate-200 text-slate-700 text-xs font-bold">• Unattempted</span>`
+            : `<span class="px-2.5 py-1 rounded-full bg-rose-100 text-rose-800 text-xs font-bold">✗ Incorrect</span>`;
+
+        const card = document.createElement('div');
+        card.className = "bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-3";
+        card.innerHTML = `
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs font-extrabold text-slate-500">Question ${idx + 1}</span>
+            ${badge}
+          </div>
+          ${item.passageId ? `<div class="text-xs bg-amber-50 border border-amber-200 text-amber-900 p-3 rounded-xl"><strong>${PASSAGES[item.passageId].title}:</strong> ${PASSAGES[item.passageId].text}</div>` : ''}
+          ${item.illustration ? `<div class="py-2">${SVG_ILLUSTRATIONS[item.illustration]}</div>` : ''}
+          <div class="font-bold text-slate-900 text-sm sm:text-base">${item.q}</div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm">
+            ${item.opts.map((opt, oIdx) => {
+              let cls = "bg-slate-50 border-slate-200 text-slate-700";
+              if (oIdx === item.ans) cls = "bg-emerald-50 border-emerald-400 text-emerald-900 font-bold";
+              else if (oIdx === userAns && oIdx !== item.ans) cls = "bg-rose-50 border-rose-400 text-rose-900 font-bold";
+              return `<div class="p-2.5 rounded-xl border ${cls}">(${letters[oIdx]}) ${opt}</div>`;
+            }).join('')}
+          </div>
+          <div class="bg-blue-50/70 border border-blue-100 rounded-xl p-3 text-xs sm:text-sm text-slate-700">
+            <strong class="text-blue-900">Explanation:</strong> ${item.exp}
+          </div>
+        `;
+        list.appendChild(card);
+      });
+
+      if (list.innerHTML === '') {
+        list.innerHTML = `<div class="bg-white rounded-2xl p-8 text-center text-slate-500 font-semibold border border-slate-200">No questions in this filter category!</div>`;
+      }
+    }
+
+    // =========================================================================
+    // CUSTOM MODAL HELPERS
+    // =========================================================================
+    function showCustomModal(title, message, onConfirm) {
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalMessage').textContent = message;
+      const confirmBtn = document.getElementById('modalConfirmBtn');
+      confirmBtn.onclick = onConfirm;
+      document.getElementById('customModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('customModal').classList.add('hidden');
+    }
+
+    // Initialize Application on Load
+    window.onload = function () {
+      updateHeaderStats();
+      renderTopicCards();
+    };
+  </script>
+</body>
+</html>
